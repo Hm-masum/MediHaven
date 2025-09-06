@@ -1,95 +1,67 @@
-import { Request, Response } from "express";
-import { AdminService } from "./Admin.service";
 import peak from "../../../shared/peak";
 import { adminFilterableFields } from "./admin.constant";
+import sendResponse from "../../../shared/sendResponse";
+import httpStatus from "http-status";
+import catchAsync from "../../../shared/catchAsync";
+import { AdminService } from "./admin.service";
 
-const getAllAdmin = async (req: Request, res: Response) => {
-  try {
-    const filters = peak(req.query, adminFilterableFields);
-    const options = peak(req.query, ["limit", "page", "sortBy", "sortOrder"]);
-    const result = await AdminService.getAllAdmin(filters, options);
+const getAllAdmin = catchAsync(async (req, res) => {
+  const filters = peak(req.query, adminFilterableFields);
+  const options = peak(req.query, ["limit", "page", "sortBy", "sortOrder"]);
+  const result = await AdminService.getAllAdmin(filters, options);
 
-    res.status(200).json({
-      success: true,
-      message: "Admin created successfully",
-      meta: result.meta,
-      data: result.data,
-    });
-  } catch (err: any) {
-    res.status(500).json({
-      success: false,
-      message: err?.name || "Something went wrong",
-    });
-  }
-};
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Admins fetched successfully",
+    meta: result.meta,
+    data: result.data,
+  });
+});
 
-const getAdminById = async (req: Request, res: Response) => {
-  try {
-    const result = await AdminService.getAdminById(req.params.id);
+const getAdminById = catchAsync(async (req, res) => {
+  const result = await AdminService.getAdminById(req.params.id);
 
-    res.status(200).json({
-      success: true,
-      message: "Admin fetched successfully",
-      data: result,
-    });
-  } catch (err: any) {
-    res.status(500).json({
-      success: false,
-      message: err?.name || "Something went wrong",
-    });
-  }
-};
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Admin fetched successfully",
+    data: result,
+  });
+});
 
-const updateAdmin = async (req: Request, res: Response) => {
-  try {
-    const result = await AdminService.updateAdmin(req.params.id, req.body);
+const updateAdmin = catchAsync(async (req, res) => {
+  const result = await AdminService.updateAdmin(req.params.id, req.body);
 
-    res.status(200).json({
-      success: true,
-      message: "Admin Update successfully",
-      data: result,
-    });
-  } catch (err: any) {
-    res.status(500).json({
-      success: false,
-      message: err?.name || "Something went wrong",
-    });
-  }
-};
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Admin Update successfully",
+    data: result,
+  });
+});
 
-const deleteAdmin = async (req: Request, res: Response) => {
-  try {
-    const result = await AdminService.deleteAdmin(req.params.id);
+const deleteAdmin = catchAsync(async (req, res) => {
+  const result = await AdminService.deleteAdmin(req.params.id);
 
-    res.status(200).json({
-      success: true,
-      message: "Admin deleted successfully",
-      data: result,
-    });
-  } catch (err: any) {
-    res.status(500).json({
-      success: false,
-      message: err?.name || "Something went wrong",
-    });
-  }
-};
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Admin deleted successfully",
+    data: result,
+  });
+});
 
-const softDeleteAdmin = async (req: Request, res: Response) => {
-  try {
-    const result = await AdminService.softDeleteAdmin(req.params.id);
+const softDeleteAdmin = catchAsync(async (req, res) => {
+  const result = await AdminService.softDeleteAdmin(req.params.id);
 
-    res.status(200).json({
-      success: true,
-      message: "Admin deleted successfully",
-      data: result,
-    });
-  } catch (err: any) {
-    res.status(500).json({
-      success: false,
-      message: err?.name || "Something went wrong",
-    });
-  }
-};
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Admin deleted successfully",
+    data: result,
+  });
+});
 
 export const AdminController = {
   getAllAdmin,
