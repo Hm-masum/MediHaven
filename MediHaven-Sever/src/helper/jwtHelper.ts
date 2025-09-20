@@ -1,4 +1,4 @@
-import jwt, { JwtPayload, Secret } from "jsonwebtoken";
+import jwt, { sign, JwtPayload, Secret } from "jsonwebtoken";
 
 export const createToken = (
   payload: { email: string; role: string },
