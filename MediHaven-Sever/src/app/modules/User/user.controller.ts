@@ -5,7 +5,7 @@ import httpStatus from "http-status";
 
 const createAdmin = async (req: Request, res: Response) => {
   try {
-    const result = await userService.createAdmin(req.body);
+    const result = await userService.createAdmin(req);
 
     sendResponse(res, {
       statusCode: httpStatus.OK,
