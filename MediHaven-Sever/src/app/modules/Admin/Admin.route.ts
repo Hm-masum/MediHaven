@@ -12,6 +12,7 @@ router.get(
   auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
   AdminController.getAllAdmin
 );
+
 router.get(
   "/:id",
   auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
@@ -30,6 +31,7 @@ router.delete(
   auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
   AdminController.deleteAdmin
 );
+
 router.delete(
   "/soft/:id",
   auth(UserRole.ADMIN, UserRole.SUPER_ADMIN),
