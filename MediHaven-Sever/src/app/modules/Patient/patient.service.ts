@@ -1,13 +1,18 @@
-import { Prisma, UserStatus } from "@prisma/client";
+import { Patient, Prisma, UserStatus } from "@prisma/client";
 import prisma from "../../../shared/prisma";
 import { paginationHelper } from "../../../helper/paginationHelper";
 import { patientSearchableFields } from "./patient.constant";
+import { IPatientFilterRequest, IPatientUpdate } from "./patient.interface";
+import { IPaginationOptions } from "../../interfaces/pagination";
 
-const getAllPatients = async (filters: any, options: any) => {
+const getAllPatients = async (
+  filters: IPatientFilterRequest,
+  options: IPaginationOptions
+) => {
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelper.calculatePagination(options);
 
-  const { searchTerm, specialties, ...filterData } = filters;
+  const { searchTerm, ...filterData } = filters;
 
   const andConditions: Prisma.PatientWhereInput[] = [];
 
@@ -72,13 +77,16 @@ const getPatientById = async (id: string) => {
   return result;
 };
 
-const updatePatientIntoDB = async (id: string, payload: any) => {
+const updatePatientIntoDB = async (
+  id: string,
+  payload: Partial<IPatientUpdate>
+): Promise<Patient | null> => {
   const { patientHealthData, medicalReport, ...patientData } = payload;
   const patientInfo = await prisma.patient.findUniqueOrThrow({
-    where: { id },
+    where: { id, isDeleted: false },
   });
 
-  const result = await prisma.$transaction(async (transactionClient) => {
+  await prisma.$transaction(async (transactionClient) => {
     // update patient data
     await transactionClient.patient.update({
       where: { id },
