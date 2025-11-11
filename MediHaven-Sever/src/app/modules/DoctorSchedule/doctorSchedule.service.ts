@@ -75,14 +75,13 @@ const getMySchedules = async (
     andConditions.length > 0 ? { AND: andConditions } : {};
 
   const result = await prisma.doctorSchedule.findMany({
-    where: whereConditions,
+    where: { ...whereConditions, doctor: { email: user?.email } },
     skip: skip,
     take: limit,
-    orderBy: { [sortBy]: sortOrder },
   });
 
   const total = await prisma.doctorSchedule.count({
-    where: whereConditions,
+    where: { ...whereConditions, doctor: { email: user?.email } },
   });
 
   return {
@@ -185,7 +184,6 @@ const getAllSchedulesFromDB = async (
     where: whereConditions,
     skip: skip,
     take: limit,
-    orderBy: { [sortBy]: sortOrder },
   });
 
   const total = await prisma.doctorSchedule.count({
