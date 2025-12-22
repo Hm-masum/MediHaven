@@ -23,9 +23,9 @@ router.get(
   AppointmentController.getMyAppointment
 );
 
-router.get(
+router.patch(
   "/status/:id",
-  auth(UserRole.DOCTOR),
+  auth(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.DOCTOR),
   AppointmentController.changeAppointmentStatus
 );
 

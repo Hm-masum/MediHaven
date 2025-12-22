@@ -40,8 +40,6 @@ const loginUser = async (payload: { email: string; password: string }) => {
     config.jwt.refresh_token_expires_in as string
   );
 
-  console.log(accessToken);
-
   return {
     accessToken,
     refreshToken,

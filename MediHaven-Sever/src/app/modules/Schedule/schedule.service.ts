@@ -6,6 +6,12 @@ import { paginationHelper } from "../../../helper/paginationHelper";
 import { IPaginationOptions } from "../../interfaces/pagination";
 import { IAuthUser } from "../../interfaces/common";
 
+// utc time
+// const convertDateTime = async(date:Date)=>{
+//   const offset = date.getTimezoneOffset() * 60 * 1000;
+//   return new Date(date.getDate() + offset)
+// }
+
 const createSchedule = async (payload: ISchedule) => {
   const { startDate, endDate, startTime, endTime } = payload;
 

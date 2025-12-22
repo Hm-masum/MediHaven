@@ -62,7 +62,7 @@ const getAllDoctors = async (
     where: whereConditions,
     skip: skip,
     take: limit,
-    orderBy: { [sortBy]: sortOrder },
+    orderBy: { averageRating: "asc" },
     include: {
       doctorSpecialties: {
         include: {
