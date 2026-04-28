@@ -70,6 +70,7 @@ const getAllDoctors = async (
         },
       },
       doctorSchedules: { include: { schedule: true } },
+      user: true,
     },
   });
 

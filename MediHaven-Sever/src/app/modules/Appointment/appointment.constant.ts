@@ -1,7 +1,4 @@
-// import { v4 as uuidv4 } from "uuid";
-//export const videoCallingId:string = uuidv4();
-export const videoCallingId: string = "gdsahfg674364gfdsahgsd";
-
+export const videoCallingId: string = "gds-ahf-g67-436"
 const today = new Date();
 export const transactionId =
   "Medi-Haven-" +

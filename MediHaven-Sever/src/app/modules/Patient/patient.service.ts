@@ -50,6 +50,7 @@ const getAllPatients = async (
     include: {
       medicalReport: true,
       patientHealthData: true,
+      user: true
     },
   });
 
@@ -133,7 +134,7 @@ const deletePatient = async (id: string) => {
       },
     });
 
-    await transactionClient.patientHealthData.delete({
+    await transactionClient.patientHealthData.deleteMany({
       where: {
         patientId: id,
       },

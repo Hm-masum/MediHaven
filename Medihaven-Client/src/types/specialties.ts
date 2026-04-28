@@ -1,0 +1,8 @@
+import { IDoctorSpecialties } from "./doctorSpecialties"
+
+export type ISpecialties ={
+  id: string ,
+  title: string,
+  icon: string,
+  doctorSpecialties: IDoctorSpecialties[]
+}

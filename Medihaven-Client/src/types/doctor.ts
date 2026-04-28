@@ -1,0 +1,33 @@
+import { IAppointment } from "./appointment";
+import { IDoctorSchedule } from "./doctorSchedule";
+import { IDoctorSpecialties } from "./doctorSpecialties";
+import { IPrescription } from "./prescription";
+import { IReview } from "./review";
+import { IUser } from "./user";
+import { IGender } from "./utils";
+
+export type IDoctor = {
+  id: string;
+  name: string;
+  email: string;
+  profilePhoto?: string | null;
+  contactNumber: string;
+  address?: string | null;
+  registrationNumber: string;
+  experience: number;
+  gender: IGender;
+  appointmentFee: number;
+  qualification: string;
+  currentWorkingPlace: string;
+  designation: string;
+  isDeleted: boolean;
+  averageRating: number;
+  createdAt: Date;
+  updatedAt: Date;
+  user: IUser;
+  doctorSpecialties: IDoctorSpecialties[];
+  doctorSchedules: IDoctorSchedule[];
+  appointment: IAppointment[];
+  prescription: IPrescription[];
+  review: IReview[];
+};

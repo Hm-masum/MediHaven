@@ -18,7 +18,32 @@ const createSpecialties = async (req: Request) => {
 };
 
 const getAllSpecialties = async () => {
-  const result = await prisma.specialties.findMany({});
+  const result = await prisma.specialties.findMany({
+    include:{
+      doctorSpecialties:true
+    }
+  });
+  return result;
+};
+
+const getSingleSpecialties = async (id: string) => {
+  const result = await prisma.specialties.findUnique({
+    where: { id },
+  });
+  return result;
+};
+
+const updateSpecialties = async (id: string, req: Request) => {
+  const file: IFile = req.file as IFile;
+  if (file) {
+    const uploadCloudinary = await fileUploader.uploadToCloudinary(file);
+    req.body.icon = uploadCloudinary?.secure_url;
+  }
+
+  const result = await prisma.specialties.update({
+    where: { id },
+    data: req.body,
+  });
   return result;
 };
 
@@ -36,5 +61,7 @@ const deleteSpecialties = async (id: string) => {
 export const SpecialtiesService = {
   createSpecialties,
   getAllSpecialties,
+  updateSpecialties,
+  getSingleSpecialties,
   deleteSpecialties,
 };

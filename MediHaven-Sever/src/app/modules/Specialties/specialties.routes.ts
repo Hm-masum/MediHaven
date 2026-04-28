@@ -7,6 +7,8 @@ const router = express.Router();
 
 router.get("/", SpecialtiesController.getAllSpecialties);
 
+router.get("/:id", SpecialtiesController.getSingleSpecialties);
+
 router.post(
   "/",
   fileUploader.upload.single("file"),
@@ -15,6 +17,17 @@ router.post(
       JSON.parse(req.body.data)
     );
     return SpecialtiesController.createSpecialties(req, res, next);
+  }
+);
+
+router.patch(
+  "/:id",
+  fileUploader.upload.single("file"),
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body = SpecialtiesValidation.updateSpecialties.parse(
+      JSON.parse(req.body.data)
+    );
+    return SpecialtiesController.updateSpecialties(req, res, next);
   }
 );
 
