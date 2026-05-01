@@ -82,6 +82,12 @@ const NavItems = (role: "ADMIN" | "DOCTOR" | "PATIENT") => {
         isActive: true,
       },
       {
+        title: "Doctor Schedules",
+        url: "/dashboard/admin/doctor-schedules",
+        icon: Calendar,
+        isActive: true,
+      },
+      {
         title: "Schedules",
         url: "/dashboard/admin/schedules",
         icon: Calendar,

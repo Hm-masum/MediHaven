@@ -5,7 +5,7 @@ import { UserRole } from "@prisma/client";
 
 const router = express.Router();
 
-router.get("/", auth(UserRole.DOCTOR), ScheduleController.getAllSchedules);
+router.get("/", auth(UserRole.DOCTOR,UserRole.ADMIN), ScheduleController.getAllSchedules);
 
 router.get(
   "/:id",

@@ -19,11 +19,17 @@ export const createAppointment = async (appointmentData: any) => {
   }
 };
 
-export const getAllAppointment = async () => {
+export const getAllAppointment = async (status?: string) => {
   try {
     const token = await getValidToken();
+
+    const url = new URL(`${process.env.NEXT_PUBLIC_BASE_API}/appointment`);
+    if(status){
+      url.searchParams.append("status", status);
+    }
+
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/appointment`,
+      url.toString(),
       {
         headers: {
           Authorization: token,
