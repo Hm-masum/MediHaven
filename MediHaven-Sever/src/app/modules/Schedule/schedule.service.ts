@@ -21,6 +21,21 @@ const createSchedule = async (payload: ISchedule) => {
   const currentDate = new Date(startDate);
   const lastDate = new Date(endDate);
 
+  // Validation
+  if(currentDate > lastDate){
+    throw new Error("Start date must be before end date");
+  }
+  const startHour = Number(startTime.split(":")[0]);
+  const startMinute = Number(startTime.split(":")[1]);
+  const endHour = Number(endTime.split(":")[0]);
+  const endMinute = Number(endTime.split(":")[1]);
+  const startTotalMinute = startHour * 60 + startMinute;
+  const endTotalMinute = endHour * 60 + endMinute;
+  if (startTotalMinute >= endTotalMinute) {
+    throw new Error("End time must be greater than start time");
+  }
+
+  // main logic
   while (currentDate <= lastDate) {
     const startDateTime = new Date(
       addMinutes(

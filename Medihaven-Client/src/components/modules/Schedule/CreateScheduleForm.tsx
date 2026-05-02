@@ -39,6 +39,9 @@ const CreateScheduleForm = () => {
       if (res.success) {
         toast.success("Schedule Create Successfully");
       }
+      else{
+        toast.error(res.message || "Failed to create schedule");
+      }
     } catch (err: any) {
       toast.error(err?.message);
     }

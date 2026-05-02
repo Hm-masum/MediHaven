@@ -1,6 +1,7 @@
 "use server";
 
 import { getValidToken } from "@/lib/verifyToken";
+import { revalidateTag } from "next/cache";
 
 export const createSchedule = async (scheduleData:any) => {
   try {
@@ -13,6 +14,7 @@ export const createSchedule = async (scheduleData:any) => {
       },
       body: JSON.stringify(scheduleData)
     });
+    revalidateTag("schedules","everything");
     const result = await res.json();
     return result;
   } catch (error: any) {
@@ -20,13 +22,16 @@ export const createSchedule = async (scheduleData:any) => {
   }
 };
 
-export const getAllSchedule = async () => {
+export const getAllSchedule = async (page: number, limit: number) => {
   try {
     const token = await getValidToken();
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/schedule`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/schedule?page=${page}&limit=${limit}`, {
       headers: {
         Authorization: token,
         "Content-Type": "application/json",
+      },
+      next: {
+        tags: ["schedules"],
       },
     });
     const result = await res.json();
@@ -36,13 +41,16 @@ export const getAllSchedule = async () => {
   }
 };
 
-export const getScheduleById = async (id:string) => {
+export const getSingleScheduleById = async (id:string) => {
   try {
     const token = await getValidToken();
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/schedule/${id}`, {
       headers: {
         Authorization: token,
         "Content-Type": "application/json",
+      },
+      next: {
+        tags: ["schedules"],
       },
     });
     const result = await res.json();
@@ -62,6 +70,7 @@ export const deleteSchedule = async (id:string) => {
         "Content-Type": "application/json",
       },
     });
+    revalidateTag("schedules","everything");
     const result =await res.json();
     return result;
   } catch (error: any) {
