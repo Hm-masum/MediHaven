@@ -73,7 +73,55 @@ const validatePayment = async (payload: any) => {
   };
 };
 
+const getAllPayments = async () => {
+  const payments = await prisma.payment.findMany({
+    include: {
+      appointment: {
+        include: {
+          patient: true,
+          doctor: true,
+        },
+      },
+    },
+  });
+  return payments;
+};
+
+const getMyPayments = async (email: string) => {
+  const payments = await prisma.payment.findMany({
+    where: {
+      OR: [
+        {
+          appointment: {
+            patient: {
+              email: email,
+            },
+          },
+        },
+        {
+          appointment: {
+            doctor: {
+              email: email,
+            },
+          },
+        },
+      ],
+    },
+    include: {
+      appointment: {
+        include: {
+          patient: true,
+          doctor: true,
+        },
+      },
+    },
+  });
+  return payments;
+};
+
 export const PaymentService = {
   initPayment,
   validatePayment,
+  getAllPayments,
+  getMyPayments
 };

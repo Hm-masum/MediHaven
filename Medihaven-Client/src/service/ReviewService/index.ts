@@ -1,6 +1,7 @@
 "use server";
 
 import { getValidToken } from "@/lib/verifyToken";
+import { revalidateTag } from "next/cache";
 
 export const createReview = async (prescriptionData: any) => {
   try {
@@ -12,6 +13,7 @@ export const createReview = async (prescriptionData: any) => {
       },
       body: JSON.stringify(prescriptionData),
     });
+    revalidateTag("reviews","everything");
     const result = await res.json();
     return result;
   } catch (error: any) {
@@ -22,19 +24,18 @@ export const createReview = async (prescriptionData: any) => {
 export const getAllReviews = async () => {
   try {
     const token = await getValidToken();
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/review`,
-      {
-        headers: {
-          Authorization: token,
-          "Content-Type": "application/json",
-        },
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/review`, {
+      headers: {
+        Authorization: token,
+        "Content-Type": "application/json",
       },
-    );
-    const result =await res.json();
+      next: {
+        tags: ["reviews"],
+      },
+    });
+    const result = await res.json();
     return result;
   } catch (error: any) {
     return Error(error);
   }
 };
-

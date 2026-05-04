@@ -78,9 +78,22 @@ const getAllPrescription = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getSinglePrescription = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await PrescriptionServices.getSinglePrescription(id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Prescription retrieve successfully",
+    data: result,
+  });
+});
+
 export const PrescriptionController = {
   createPrescription,
   getPatientPrescription,
   getDoctorPrescription,
   getAllPrescription,
+  getSinglePrescription,
 };

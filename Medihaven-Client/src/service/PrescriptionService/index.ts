@@ -1,17 +1,22 @@
 "use server";
 
 import { getValidToken } from "@/lib/verifyToken";
+import { revalidateTag } from "next/cache";
 
 export const createPrescription = async (prescriptionData: any) => {
   try {
     const token = await getValidToken();
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/prescription`, {
-      method: "POST",
-      headers: {
-        Authorization: token,
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/prescription`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: token,
+        },
+        body: JSON.stringify(prescriptionData),
       },
-      body: JSON.stringify(prescriptionData),
-    });
+    );
+    revalidateTag("prescriptions", "everything");
     const result = await res.json();
     return result;
   } catch (error: any) {
@@ -28,6 +33,9 @@ export const getAllPrescription = async () => {
         headers: {
           Authorization: token,
           "Content-Type": "application/json",
+        },
+        next: {
+          tags: ["prescriptions"],
         },
       },
     );
@@ -48,6 +56,9 @@ export const getMyPrescription = async () => {
           Authorization: token,
           "Content-Type": "application/json",
         },
+        next: {
+          tags: ["prescriptions"],
+        },
       },
     );
     const result = await res.json();
@@ -67,13 +78,36 @@ export const getDoctorPrescription = async () => {
           Authorization: token,
           "Content-Type": "application/json",
         },
+        next: {
+          tags: ["prescriptions"],
+        },
       },
     );
-    const result =await res.json();
+    const result = await res.json();
     return result;
   } catch (error: any) {
     return Error(error);
   }
 };
 
-
+export const getSinglePrescription = async (prescriptionId: string) => {
+  try {
+    const token = await getValidToken();
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/prescription/${prescriptionId}`,
+      {
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+        next: {
+          tags: ["prescriptions"],
+        },
+      },
+    );
+    const result = await res.json();
+    return result;
+  } catch (error: any) {
+    return Error(error);
+  }
+};

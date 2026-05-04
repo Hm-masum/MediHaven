@@ -187,9 +187,25 @@ const getAllPrescription = async (
   };
 };
 
+const getSinglePrescription = async (id:string) => {
+  const result = await prisma.prescription.findUniqueOrThrow({
+    where: {
+      id: id,
+    },
+    include: {
+      doctor: true,
+      patient: true,
+      appointment: true,
+    },
+  });
+
+  return result;
+};
+
 export const PrescriptionServices = {
   createPrescription,
   getPatientPrescription,
   getDoctorPrescription,
   getAllPrescription,
+  getSinglePrescription,
 };

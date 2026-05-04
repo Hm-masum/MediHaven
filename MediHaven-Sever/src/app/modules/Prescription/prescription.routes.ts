@@ -13,6 +13,8 @@ router.post(
 
 router.get("/", PrescriptionController.getAllPrescription);
 
+router.get("/:id", PrescriptionController.getSinglePrescription);
+
 router.get(
   "/my-prescription",
   auth(UserRole.PATIENT),
