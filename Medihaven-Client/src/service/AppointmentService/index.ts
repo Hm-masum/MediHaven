@@ -1,6 +1,7 @@
 "use server";
 
 import { getValidToken } from "@/lib/verifyToken";
+import { revalidateTag } from "next/cache";
 
 export const createAppointment = async (appointmentData: any) => {
   try {
@@ -12,6 +13,7 @@ export const createAppointment = async (appointmentData: any) => {
       },
       body: JSON.stringify(appointmentData),
     });
+    revalidateTag("appointment", "everything");
     const result = await res.json();
     return result;
   } catch (error: any) {
@@ -24,19 +26,19 @@ export const getAllAppointment = async (status?: string) => {
     const token = await getValidToken();
 
     const url = new URL(`${process.env.NEXT_PUBLIC_BASE_API}/appointment`);
-    if(status){
+    if (status) {
       url.searchParams.append("status", status);
     }
 
-    const res = await fetch(
-      url.toString(),
-      {
-        headers: {
-          Authorization: token,
-          "Content-Type": "application/json",
-        },
+    const res = await fetch(url.toString(), {
+      headers: {
+        Authorization: token,
+        "Content-Type": "application/json",
       },
-    );
+      next: {
+        tags: ["appointment"],
+      },
+    });
     const result = await res.json();
     return result;
   } catch (error: any) {
@@ -44,18 +46,26 @@ export const getAllAppointment = async (status?: string) => {
   }
 };
 
-export const getMyAppointment = async () => {
+export const getMyAppointment = async (status?: string) => {
   try {
     const token = await getValidToken();
-    const res = await fetch(
+
+    const url = new URL(
       `${process.env.NEXT_PUBLIC_BASE_API}/appointment/my-appointment`,
-      {
-        headers: {
-          Authorization: token,
-          "Content-Type": "application/json",
-        },
-      },
     );
+    if (status) {
+      url.searchParams.append("status", status);
+    }
+
+    const res = await fetch(url.toString(), {
+      headers: {
+        Authorization: token,
+        "Content-Type": "application/json",
+      },
+      next: {
+        tags: ["appointment"],
+      },
+    });
     const result = await res.json();
     return result;
   } catch (error: any) {
@@ -63,7 +73,7 @@ export const getMyAppointment = async () => {
   }
 };
 
-export const changeAppointmentStatus = async (id: string,status:string) => {
+export const changeAppointmentStatus = async (id: string, status: string) => {
   try {
     const token = await getValidToken();
     const res = await fetch(
@@ -74,9 +84,10 @@ export const changeAppointmentStatus = async (id: string,status:string) => {
           Authorization: token,
           "Content-Type": "application/json",
         },
-        body:JSON.stringify(status)
+        body: JSON.stringify(status),
       },
     );
+    revalidateTag("appointment", "everything");
     const result = await res.json();
     return result;
   } catch (error: any) {

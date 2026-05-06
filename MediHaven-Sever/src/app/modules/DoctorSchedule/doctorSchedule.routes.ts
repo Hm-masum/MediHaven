@@ -17,7 +17,6 @@ router.get(
     DoctorScheduleController.getAllSchedulesFromDB
 );
 
-
 router.get(
   "/my-schedules",
   auth(UserRole.DOCTOR),

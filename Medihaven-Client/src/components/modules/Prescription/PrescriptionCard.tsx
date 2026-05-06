@@ -45,7 +45,7 @@ export default function PrescriptionCard({
         </p>
 
         {/* Button */}
-        <Link href={`/dashboard/admin/prescriptions/${prescription.id}`}>
+        <Link href={`/${prescription.id}`}>
           <Button
             variant="outline"
             className="w-fit rounded-full flex items-center gap-2"

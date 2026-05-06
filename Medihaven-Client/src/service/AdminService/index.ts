@@ -1,6 +1,7 @@
 "use server";
 
 import { getValidToken } from "@/lib/verifyToken";
+import { revalidateTag } from "next/cache";
 
 export const getAllAdmin = async () => {
   try {
@@ -10,6 +11,9 @@ export const getAllAdmin = async () => {
         Authorization: token,
         "Content-Type": "application/json",
       },
+      next: {
+        tags: ["admin"],
+      },
     });
     const result = await res.json();
     return result;
@@ -18,7 +22,7 @@ export const getAllAdmin = async () => {
   }
 };
 
-export const getAdminById = async (id:string) => {
+export const getAdminById = async (id: string) => {
   try {
     const token = await getValidToken();
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/admin/${id}`, {
@@ -26,6 +30,9 @@ export const getAdminById = async (id:string) => {
         Authorization: token,
         "Content-Type": "application/json",
       },
+      next: {
+        tags: ["admin"],
+      },
     });
     const result = await res.json();
     return result;
@@ -34,17 +41,18 @@ export const getAdminById = async (id:string) => {
   }
 };
 
-export const updateAdminById = async (id:string,userData:any) => {
+export const updateAdminById = async (id: string, userData: any) => {
   try {
     const token = await getValidToken();
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/admin/${id}`, {
-      method:"PATCH",
+      method: "PATCH",
       headers: {
         Authorization: token,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(userData)
+      body: JSON.stringify(userData),
     });
+    revalidateTag("admin", "everything");
     const result = await res.json();
     return result;
   } catch (error: any) {
@@ -52,16 +60,17 @@ export const updateAdminById = async (id:string,userData:any) => {
   }
 };
 
-export const deleteAdmin = async (id:string) => {
+export const deleteAdmin = async (id: string) => {
   try {
     const token = await getValidToken();
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/admin/${id}`, {
-      method:"DELETE",
+      method: "DELETE",
       headers: {
         Authorization: token,
         "Content-Type": "application/json",
       },
     });
+    revalidateTag("admin", "everything");
     const result = await res.json();
     return result;
   } catch (error: any) {
@@ -69,16 +78,20 @@ export const deleteAdmin = async (id:string) => {
   }
 };
 
-export const softDeleteAdmin = async (id:string) => {
+export const softDeleteAdmin = async (id: string) => {
   try {
     const token = await getValidToken();
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/admin/soft/${id}`, {
-      method:"DELETE",
-      headers: {
-        Authorization: token,
-        "Content-Type": "application/json",
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/admin/soft/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
       },
-    });
+    );
+    revalidateTag("admin", "everything");
     const result = await res.json();
     return result;
   } catch (error: any) {

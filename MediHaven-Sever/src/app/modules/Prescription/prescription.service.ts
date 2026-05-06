@@ -13,7 +13,7 @@ import { paginationHelper } from "../../../helper/paginationHelper";
 
 const createPrescription = async (
   payload: Partial<Prescription>,
-  user: IAuthUser
+  user: IAuthUser,
 ) => {
   const appointmentData = await prisma.appointment.findFirst({
     where: {
@@ -53,7 +53,7 @@ const createPrescription = async (
 
 const getPatientPrescription = async (
   user: IAuthUser,
-  options: IPaginationOptions
+  options: IPaginationOptions,
 ) => {
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelper.calculatePagination(options);
@@ -61,7 +61,9 @@ const getPatientPrescription = async (
   const result = await prisma.prescription.findMany({
     where: {
       patient: {
-        email: user?.email,
+        is: {
+          email: user?.email,
+        },
       },
     },
     skip: skip,
@@ -77,7 +79,9 @@ const getPatientPrescription = async (
   const total = await prisma.prescription.count({
     where: {
       patient: {
-        email: user?.email,
+        is: {
+          email: user?.email,
+        },
       },
     },
   });
@@ -94,7 +98,7 @@ const getPatientPrescription = async (
 
 const getDoctorPrescription = async (
   user: IAuthUser,
-  options: IPaginationOptions
+  options: IPaginationOptions,
 ) => {
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelper.calculatePagination(options);
@@ -135,7 +139,7 @@ const getDoctorPrescription = async (
 
 const getAllPrescription = async (
   filters: any,
-  options: IPaginationOptions
+  options: IPaginationOptions,
 ) => {
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelper.calculatePagination(options);
@@ -187,7 +191,7 @@ const getAllPrescription = async (
   };
 };
 
-const getSinglePrescription = async (id:string) => {
+const getSinglePrescription = async (id: string) => {
   const result = await prisma.prescription.findUniqueOrThrow({
     where: {
       id: id,
