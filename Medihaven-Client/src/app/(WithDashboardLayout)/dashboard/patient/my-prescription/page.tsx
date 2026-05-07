@@ -7,7 +7,7 @@ const MyPrescriptionInfoPage = async () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
       {prescriptionData?.map((prescription: IPrescription) => (
-        <PrescriptionCard key={prescription.id} prescription={prescription} />
+        <PrescriptionCard key={prescription.id} prescription={prescription} basePath="/dashboard/patient/my-prescription" />
       ))}
     </div>
   );

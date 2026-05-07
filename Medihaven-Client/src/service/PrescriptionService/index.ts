@@ -24,11 +24,16 @@ export const createPrescription = async (prescriptionData: any) => {
   }
 };
 
-export const getAllPrescription = async () => {
+export const getAllPrescription = async ({ doctorEmail }: { doctorEmail?: string }) => {
   try {
     const token = await getValidToken();
+
+    const url = new URL(`${process.env.NEXT_PUBLIC_BASE_API}/prescription`);
+    if (doctorEmail) {  
+      url.searchParams.append("doctorEmail", doctorEmail);
+    }
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/prescription`,
+      url.toString(),
       {
         headers: {
           Authorization: token,

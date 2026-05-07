@@ -7,9 +7,10 @@ import { Eye } from "lucide-react";
 import Link from "next/link";
 
 export default function PrescriptionCard({
-  prescription,
+  prescription,basePath
 }: {
-  prescription: IPrescription;
+  prescription: IPrescription,
+  basePath: string
 }) {
   const { doctor, patient, followUpDate, appointment, createdAt } =
     prescription;
@@ -45,7 +46,7 @@ export default function PrescriptionCard({
         </p>
 
         {/* Button */}
-        <Link href={`/${prescription.id}`}>
+        <Link href={`${basePath}/${prescription.id}`}>
           <Button
             variant="outline"
             className="w-fit rounded-full flex items-center gap-2"

@@ -106,7 +106,9 @@ const getDoctorPrescription = async (
   const result = await prisma.prescription.findMany({
     where: {
       doctor: {
-        email: user?.email,
+        is: {
+          email: user?.email,
+        },
       },
     },
     skip: skip,
@@ -121,8 +123,10 @@ const getDoctorPrescription = async (
 
   const total = await prisma.prescription.count({
     where: {
-      patient: {
-        email: user?.email,
+      doctor: {
+        is: {
+          email: user?.email,
+        },
       },
     },
   });
@@ -150,7 +154,9 @@ const getAllPrescription = async (
   if (patientEmail) {
     andConditions.push({
       patient: {
-        email: patientEmail,
+        is: {
+          email: patientEmail,
+        },
       },
     });
   }
@@ -158,7 +164,9 @@ const getAllPrescription = async (
   if (doctorEmail) {
     andConditions.push({
       doctor: {
-        email: doctorEmail,
+        is: {
+          email: doctorEmail,
+        },
       },
     });
   }
