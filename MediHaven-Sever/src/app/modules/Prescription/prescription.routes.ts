@@ -19,12 +19,13 @@ router.get(
   PrescriptionController.getPatientPrescription
 );
 
-router.get("/:id", PrescriptionController.getSinglePrescription);
-
 router.get(
   "/doctor-prescription",
   auth(UserRole.DOCTOR),
   PrescriptionController.getDoctorPrescription
 );
+
+router.get("/:id", PrescriptionController.getSinglePrescription);
+
 
 export const PrescriptionRoutes = router;

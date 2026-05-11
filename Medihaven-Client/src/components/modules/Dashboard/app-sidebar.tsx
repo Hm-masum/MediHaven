@@ -109,6 +109,30 @@ const NavItems = (role: "ADMIN" | "DOCTOR" | "PATIENT") => {
         isActive: true,
       },
       {
+        title: "Appointments",
+        url: "/dashboard/doctor/appointments",
+        icon: BookmarkCheck,
+        isActive: true,
+      },
+      {
+        title: "Schedules",
+        url: "/dashboard/doctor/schedules",
+        icon: Calendar,
+        isActive: true,
+      },
+      {
+        title: "Prescriptions",
+        url: "/dashboard/doctor/prescriptions",
+        icon: BookText,
+        isActive: true,
+      },
+      {
+        title: "Payments",
+        url: "/dashboard/doctor/payments",
+        icon: Wallet,
+        isActive: true,
+      },
+      {
         title: "Profile",
         url: "#",
         icon: UserRoundCog,

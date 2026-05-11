@@ -17,12 +17,14 @@ import { useState } from "react";
 import { updateSpecialties } from "@/service/SpecialtiesService";
 import SectionTitle from "@/components/shared/SectionTitle";
 import { ISpecialties } from "@/types";
+import { useRouter } from "next/navigation";
 
 const UpdateSpecialtiesForm = ({
   specialtiesData,
 }: {
   specialtiesData: ISpecialties;
 }) => {
+  const router = useRouter();
   const [preview, setPreview] = useState<string | null>(null);
   const form = useForm({
     defaultValues: {
@@ -52,6 +54,10 @@ const UpdateSpecialtiesForm = ({
       if (res.success) {
         setPreview(null);
         toast.success("Specialties Updated Successfully");
+        router.refresh();
+      }
+      else{
+        toast.error("Failed to update specialties");
       }
     } catch (err: any) {
       toast.error(err?.message);

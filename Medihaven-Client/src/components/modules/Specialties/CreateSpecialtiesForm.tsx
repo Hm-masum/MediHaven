@@ -16,8 +16,10 @@ import Image from "next/image";
 import { useState } from "react";
 import { createSpecialties } from "@/service/SpecialtiesService";
 import SectionTitle from "@/components/shared/SectionTitle";
+import { useRouter } from "next/navigation";
 
 const CreateSpecialtiesForm = () => {
+  const router = useRouter();
   const [preview, setPreview] = useState<string | null>(null);
   const form = useForm({
     defaultValues: {
@@ -45,6 +47,10 @@ const CreateSpecialtiesForm = () => {
       if (res.success) {
         setPreview(null);
         toast.success("Specialties Create Successfully");
+        router.push("/dashboard/admin/specialties");
+      }
+      else{
+        toast.error("Failed to create specialties");
       }
     } catch (err: any) {
       toast.error(err?.message);

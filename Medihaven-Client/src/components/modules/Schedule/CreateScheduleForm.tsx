@@ -12,10 +12,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { createSchedule } from "@/service/ScheduleService";
+import { useRouter } from "next/navigation";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 const CreateScheduleForm = () => {
+  const router = useRouter();
   const form = useForm({
     defaultValues: {
       startDate: "",
@@ -38,6 +40,7 @@ const CreateScheduleForm = () => {
       const res = await createSchedule(scheduleData);
       if (res.success) {
         toast.success("Schedule Create Successfully");
+        router.push("/dashboard/admin/schedules");
       }
       else{
         toast.error(res.message || "Failed to create schedule");
