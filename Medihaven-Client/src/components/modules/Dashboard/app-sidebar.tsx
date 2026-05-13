@@ -99,6 +99,21 @@ const NavItems = (role: "ADMIN" | "DOCTOR" | "PATIENT") => {
         icon: Award,
         isActive: true,
       },
+      {
+        title: "Profile",
+        url: "#",
+        icon: UserRoundCog,
+        items: [
+          {
+            title: "My Profile",
+            url: "/dashboard/my-profile",
+          },
+          {
+            title: "Update Profile",
+            url: "/dashboard/update-profile",
+          },
+        ],
+      },
     ];
   } else if (role === "DOCTOR") {
     return [
@@ -116,7 +131,7 @@ const NavItems = (role: "ADMIN" | "DOCTOR" | "PATIENT") => {
       },
       {
         title: "Schedules",
-        url: "/dashboard/doctor/schedules",
+        url: "/dashboard/doctor/my-schedules",
         icon: Calendar,
         isActive: true,
       },

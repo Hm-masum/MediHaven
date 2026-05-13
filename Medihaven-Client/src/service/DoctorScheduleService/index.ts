@@ -1,6 +1,7 @@
 "use server";
 
 import { getValidToken } from "@/lib/verifyToken";
+import { revalidateTag } from "next/cache";
 
 export const createDoctorSchedule = async (scheduleData: any) => {
   try {
@@ -10,11 +11,13 @@ export const createDoctorSchedule = async (scheduleData: any) => {
       {
         method: "POST",
         headers: {
+          "Content-Type": "application/json",
           Authorization: token,
         },
         body: JSON.stringify(scheduleData),
       },
     );
+    revalidateTag("doctor-schedules","max");
     const result = await res.json();
     return result;
   } catch (error: any) {
@@ -31,6 +34,9 @@ export const getAllDoctorSchedule = async () => {
         headers: {
           Authorization: token,
           "Content-Type": "application/json",
+        },
+        next: {
+          tags: ["doctor-schedules"],
         },
       },
     );
@@ -50,6 +56,9 @@ export const getMySchedule = async () => {
         headers: {
           Authorization: token,
           "Content-Type": "application/json",
+        },
+        next: {
+          tags: ["doctor-schedules"],
         },
       },
     );
@@ -73,6 +82,7 @@ export const deleteMySchedule = async (id: string) => {
         },
       },
     );
+    revalidateTag("doctor-schedules","max");
     const result = await res.json();
     return result;
   } catch (error: any) {

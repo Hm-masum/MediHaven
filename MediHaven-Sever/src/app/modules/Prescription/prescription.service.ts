@@ -99,18 +99,55 @@ const getPatientPrescription = async (
 const getDoctorPrescription = async (
   user: IAuthUser,
   options: IPaginationOptions,
+  filters: any,
 ) => {
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelper.calculatePagination(options);
 
-  const result = await prisma.prescription.findMany({
-    where: {
+  const { searchTerm } = filters;
+
+  const andConditions: Prisma.PrescriptionWhereInput[] = [
+    {
       doctor: {
         is: {
           email: user?.email,
         },
       },
     },
+  ];
+
+  if (searchTerm) {
+    andConditions.push({
+      OR: [
+        {
+          patient: {
+            is: {
+              email: {
+                contains: searchTerm,
+                mode: "insensitive",
+              },
+            },
+          },
+        },
+        {
+          patient: {
+            is: {
+              name: {
+                contains: searchTerm,
+                mode: "insensitive",
+              },
+            },
+          },
+        },
+      ],
+    });
+  }
+
+  const whereConditions: Prisma.PrescriptionWhereInput =
+    andConditions.length > 0 ? { AND: andConditions } : {};
+
+  const result = await prisma.prescription.findMany({
+    where: whereConditions,
     skip: skip,
     take: limit,
     orderBy: { [sortBy]: sortOrder },
@@ -122,13 +159,7 @@ const getDoctorPrescription = async (
   });
 
   const total = await prisma.prescription.count({
-    where: {
-      doctor: {
-        is: {
-          email: user?.email,
-        },
-      },
-    },
+    where: whereConditions,
   });
 
   return {
@@ -149,7 +180,7 @@ const getAllPrescription = async (
     paginationHelper.calculatePagination(options);
 
   const { patientEmail, doctorEmail } = filters;
-  const andConditions = [];
+  const andConditions: Prisma.PrescriptionWhereInput[] = [];
 
   if (patientEmail) {
     andConditions.push({

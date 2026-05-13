@@ -3,7 +3,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import DeleteConfirmationModal from "@/components/ui/core/TLModal/DeleteConfirmationModal";
 import { TLTable } from "@/components/ui/core/TLTable";
-import { deleteSpecialties } from "@/service/SpecialtiesService";
+import { deleteMySchedule } from "@/service/DoctorScheduleService";
 import { IDoctorSchedule } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Trash } from "lucide-react";
@@ -28,12 +28,12 @@ const MyDoctorSchedulesInfo = ({
   const handleDeleteConfirm = async () => {
     try {
       if (selectedId) {
-        const res = await deleteSpecialties(selectedId);
+        const res = await deleteMySchedule(selectedId);
         if (res.success) {
           toast.success(res.message);
           setModalOpen(false);
         } else {
-          toast.error(res.message);
+          toast.error(res.message || "Failed to delete the doctor schedule.");
         }
       }
     } catch (err: any) {

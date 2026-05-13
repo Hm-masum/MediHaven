@@ -46,10 +46,12 @@ const getPatientPrescription = catchAsync(
 const getDoctorPrescription = catchAsync(
   async (req: Request & { user?: IAuthUser }, res: Response) => {
     const user = req.user;
+     const filters = peak(req.query, prescriptionFilterableFields);
     const options = peak(req.query, ["limit", "page", "sortBy", "sortOrder"]);
     const result = await PrescriptionServices.getDoctorPrescription(
       user as IAuthUser,
-      options
+      options,
+      filters
     );
 
     sendResponse(res, {

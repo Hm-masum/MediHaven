@@ -76,6 +76,10 @@ const getMySchedules = async (
 
   const result = await prisma.doctorSchedule.findMany({
     where: { ...whereConditions, doctor: { email: user?.email } },
+    include: {
+      doctor: true,
+      schedule: true,
+    },
     skip: skip,
     take: limit,
   });

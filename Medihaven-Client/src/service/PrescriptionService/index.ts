@@ -73,11 +73,16 @@ export const getMyPrescription = async () => {
   }
 };
 
-export const getDoctorPrescription = async () => {
+export const getDoctorPrescription = async (searchTerm?: string) => {
   try {
     const token = await getValidToken();
+
+    const url = new URL(`${process.env.NEXT_PUBLIC_BASE_API}/prescription/doctor-prescription`);
+    if (searchTerm) {
+      url.searchParams.append("searchTerm", searchTerm);
+    }
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/prescription/doctor-prescription`,
+      url.toString(),
       {
         headers: {
           Authorization: token,
