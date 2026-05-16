@@ -225,6 +225,13 @@ const getMyProfile = async (email: string) => {
       where: {
         email: userInfo.email,
       },
+      include:{
+        doctorSpecialties:{
+          include:{
+            specialties:true
+          }
+        }
+      }
     });
   }
 

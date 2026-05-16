@@ -31,3 +31,27 @@ export type IDoctor = {
   prescription: IPrescription[];
   review: IReview[];
 };
+
+export type IDoctorProfile = {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  needPasswordChange: boolean;
+  status: string;
+  profilePhoto?: string | null;
+  contactNumber: string;
+  address?: string | null;
+  registrationNumber: string;
+  experience: number;
+  gender: IGender;
+  appointmentFee: number;
+  qualification: string;
+  currentWorkingPlace: string;
+  designation: string;
+  isDeleted: boolean;
+  averageRating: number;
+  createdAt: Date;
+  updatedAt: Date;
+  doctorSpecialties: IDoctorSpecialties[];
+};

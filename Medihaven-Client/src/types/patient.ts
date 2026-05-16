@@ -21,4 +21,25 @@ export type IPatient = {
   appointment: IAppointment[];
   prescription: IPrescription[];
   review: IReview[];
-}
+};
+
+export type IPatientProfile = {
+  id: string;
+  email: string;
+  name: string;
+  profilePhoto?: string;
+  contactNumber?: string;
+  role: string;
+  needPasswordChange: boolean;
+  status: string;
+  address?: string;
+  isDeleted: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  user: IUser;
+  patientHealthData?: IPatientHealthData;
+  medicalReport: IMedicalReport[];
+  appointment: IAppointment[];
+  prescription: IPrescription[];
+  review: IReview[];
+};

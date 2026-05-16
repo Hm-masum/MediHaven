@@ -105,12 +105,12 @@ const NavItems = (role: "ADMIN" | "DOCTOR" | "PATIENT") => {
         icon: UserRoundCog,
         items: [
           {
-            title: "My Profile",
-            url: "/dashboard/my-profile",
+            title: "Profile",
+            url: "/dashboard/admin/profile",
           },
           {
             title: "Update Profile",
-            url: "/dashboard/update-profile",
+            url: "/dashboard/admin/update-profile",
           },
         ],
       },
@@ -153,17 +153,17 @@ const NavItems = (role: "ADMIN" | "DOCTOR" | "PATIENT") => {
         icon: UserRoundCog,
         items: [
           {
-            title: "My Profile",
-            url: "/dashboard/my-profile",
+            title: "Profile",
+            url: "/dashboard/doctor/profile",
           },
           {
             title: "Update Profile",
-            url: "/dashboard/update-profile",
-          }
+            url: "/dashboard/doctor/update-profile",
+          },
         ],
       },
     ];
-  }else if (role === "PATIENT") {
+  } else if (role === "PATIENT") {
     return [
       {
         title: "Dashboard",
@@ -195,12 +195,12 @@ const NavItems = (role: "ADMIN" | "DOCTOR" | "PATIENT") => {
         icon: UserRoundCog,
         items: [
           {
-            title: "My Profile",
-            url: "/dashboard/my-profile",
+            title: "Profile",
+            url: "/dashboard/patient/profile",
           },
           {
             title: "Update Profile",
-            url: "/dashboard/update-profile",
+            url: "/dashboard/patient/update-profile",
           },
         ],
       },
@@ -211,7 +211,9 @@ const NavItems = (role: "ADMIN" | "DOCTOR" | "PATIENT") => {
 export function AppSidebar({
   role,
   ...props
-}: { role: "ADMIN" | "DOCTOR" | "PATIENT"} & React.ComponentProps<typeof Sidebar>) {
+}: { role: "ADMIN" | "DOCTOR" | "PATIENT" } & React.ComponentProps<
+  typeof Sidebar
+>) {
   const navMain = NavItems(role);
 
   return (
