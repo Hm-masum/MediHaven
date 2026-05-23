@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -9,7 +11,7 @@ export default function AdminProfile({ admin }: { admin: IAdminProfile }) {
   return (
     <div className="mx-auto py-2">
       <Card className="overflow-hidden border shadow-sm">
-        <div className="h-36 bg-gradient-to-r from-violet-600 to-indigo-600" />
+        <div className="h-36 bg-linear-to-r from-purple-500 to-pink-500" />
 
         <CardContent className="relative px-6 pb-8">
           <div className="flex flex-col gap-4 md:flex-row md:items-end -mt-12 ">

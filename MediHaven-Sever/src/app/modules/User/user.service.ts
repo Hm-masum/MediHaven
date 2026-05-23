@@ -98,7 +98,16 @@ const createPatient = async (req: any): Promise<Patient> => {
       data: req.body.patient,
     });
 
-    return createdPatientData;
+    const getpatientData = await transactionClient.patient.findUniqueOrThrow({
+      where: {
+        email: req.body.patient.email,
+      },
+      include: {
+        user: true,
+      },
+    });
+
+    return getpatientData;
   });
 
   return result;
@@ -219,19 +228,23 @@ const getMyProfile = async (email: string) => {
       where: {
         email: userInfo.email,
       },
+      include: {
+        medicalReport: true,
+        patientHealthData: true,
+      },
     });
   } else if (userInfo.role === UserRole.DOCTOR) {
     profileInfo = await prisma.doctor.findUnique({
       where: {
         email: userInfo.email,
       },
-      include:{
-        doctorSpecialties:{
-          include:{
-            specialties:true
-          }
-        }
-      }
+      include: {
+        doctorSpecialties: {
+          include: {
+            specialties: true,
+          },
+        },
+      },
     });
   }
 
@@ -276,18 +289,54 @@ const updateMyProfile = async (email: string, req: any) => {
       data: req.body,
     });
   } else if (userInfo.role === UserRole.PATIENT) {
-    profileInfo = await prisma.patient.update({
-      where: {
-        email: userInfo.email,
-      },
-      data: req.body,
+    const { patientHealthData, ...remainingData } = req.body;
+    profileInfo = await prisma.$transaction(async (tx) => {
+      const patient = await tx.patient.update({
+        where: {
+          email: userInfo.email,
+        },
+        data: {
+          ...remainingData,
+        },
+      });
+
+      if (patientHealthData) {
+        await tx.patientHealthData.upsert({
+          where: { patientId: patient.id },
+          update: patientHealthData,
+          create: { ...patientHealthData, patientId: patient.id },
+        });
+      }
+
+      return patient;
     });
   } else if (userInfo.role === UserRole.DOCTOR) {
-    profileInfo = await prisma.doctor.update({
-      where: {
-        email: userInfo.email,
-      },
-      data: req.body,
+    const { doctorSpecialties, ...remainingData } = req.body;
+    profileInfo = await prisma.$transaction(async (tx) => {
+      const doctor = await tx.doctor.update({
+        where: {
+          email: userInfo.email,
+        },
+        data: {
+          ...remainingData,
+        },
+      });
+      if (doctorSpecialties?.length) {
+        await tx.doctorSpecialties.deleteMany({
+          where: {
+            doctorId: doctor.id,
+          },
+        });
+
+        await tx.doctorSpecialties.createMany({
+          data: doctorSpecialties.map((specialtyId: string) => ({
+            doctorId: doctor.id,
+            specialtiesId: specialtyId,
+          })),
+        });
+      }
+
+      return doctor;
     });
   }
 

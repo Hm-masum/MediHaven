@@ -12,7 +12,7 @@ export const initPayment = async (appointmentId: string) => {
         Authorization: token,
       },
     });
-    revalidateTag("payments","everything");
+    revalidateTag("payments","max");
     const result =await res.json();
     return result;
   } catch (error: any) {

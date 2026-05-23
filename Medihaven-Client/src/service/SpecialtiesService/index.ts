@@ -48,7 +48,7 @@ export const createSpecialties = async (specialtiesData:FormData) => {
       },
       body: specialtiesData,
     });
-    revalidateTag("specialties","everything");
+    revalidateTag("specialties","max");
     const result = await res.json();
     return result;
   } catch (error: any) {
@@ -66,7 +66,7 @@ export const updateSpecialties = async (id:string,specialtiesData:FormData) => {
       },
       body: specialtiesData,
     });
-    revalidateTag("specialties","everything");
+    revalidateTag("specialties","max");
     const result = await res.json();
     return result;
   } catch (error: any) {
@@ -84,7 +84,7 @@ export const deleteSpecialties = async (id:string) => {
         "Content-Type": "application/json",
       },
     });
-    revalidateTag("specialties","everything");
+    revalidateTag("specialties","max");
     const result =await res.json();
     return result;
   } catch (error: any) {

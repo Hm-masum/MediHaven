@@ -98,7 +98,7 @@ const MyDoctorSchedulesInfo = ({
       header: () => <div>Action</div>,
       cell: ({ row }) => (
         <button
-          className="text-red-500"
+          className="text-pink-500"
           title="Delete"
           onClick={() => handleDelete(row.original)}
         >

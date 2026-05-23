@@ -16,13 +16,13 @@ export default function PrescriptionCard({
     prescription;
 
   return (
-    <Card className="rounded-xl shadow-sm border bg-white">
+    <Card className="rounded-xl shadow-sm border ">
       <CardContent className="p-4 space-y-4">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="font-semibold text-gray-800">Rx Summary</h3>
-            <p className="text-xs text-gray-500">
+            <h3 className="font-semibold text-gray-800 dark:text-gray-200">Rx Summary</h3>
+            <p className="text-xs text-gray-400">
               {new Date(createdAt).toLocaleDateString()}
             </p>
           </div>
@@ -33,14 +33,14 @@ export default function PrescriptionCard({
         </div>
 
         {/* Patient / Doctor Box */}
-        <div className="bg-gray-100 rounded-xl p-3">
+        <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-3">
           <p className="text-xs text-gray-500 mb-1">PATIENT / DOCTOR</p>
-          <p className=" text-gray-800">{patient.name}</p>
-          <p className=" text-gray-600">{doctor.name}</p>
+          <p className=" text-gray-800 dark:text-gray-300">{patient.name}</p>
+          <p className=" text-gray-600 dark:text-gray-300">{doctor.name}</p>
         </div>
 
         {/* Note */}
-        <p className="text-sm text-gray-500 italic">
+        <p className="text-sm text-gray-400 italic">
           "Continue prescribed medication. Follow-up in{" "}
           {new Date(followUpDate || "").toLocaleDateString()}"
         </p>

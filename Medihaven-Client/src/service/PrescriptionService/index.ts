@@ -16,7 +16,7 @@ export const createPrescription = async (prescriptionData: any) => {
         body: JSON.stringify(prescriptionData),
       },
     );
-    revalidateTag("prescriptions", "everything");
+    revalidateTag("prescriptions", "max");
     const result = await res.json();
     return result;
   } catch (error: any) {

@@ -65,7 +65,7 @@ export const updatePatientById = async (id: string, userData: any) => {
         body: JSON.stringify(userData),
       },
     );
-    revalidateTag("patient","everything");
+    revalidateTag("patient","max");
     const result = await res.json();
     return result;
   } catch (error: any) {
@@ -86,7 +86,7 @@ export const deletePatient = async (id: string) => {
         },
       },
     );
-    revalidateTag("patient","everything");
+    revalidateTag("patient","max");
     const result = await res.json();
     return result;
   } catch (error: any) {
@@ -107,7 +107,7 @@ export const softDeletePatient = async (id: string) => {
         },
       },
     );
-    revalidateTag("patient","everything");
+    revalidateTag("patient","max");
     const result = await res.json();
     return result;
   } catch (error: any) {

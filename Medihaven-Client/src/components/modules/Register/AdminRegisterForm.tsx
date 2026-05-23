@@ -167,7 +167,7 @@ const AdminRegisterForm = () => {
 
           <Button
             type="submit"
-            className="mt-3 w-full bg-blue-700 py-3 dark:text-white"
+            className="mt-3 w-full bg-linear-to-r from-purple-500 to-pink-500 py-3 dark:text-white"
           >
             {isSubmitting ? "Registering...." : "Register"}
           </Button>

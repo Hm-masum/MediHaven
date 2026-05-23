@@ -12,7 +12,7 @@ const MyDoctorSchedulePage = async () => {
       <div className="flex justify-end">
         <Link
           href="/dashboard/doctor/my-schedules/create"
-          className="px-4 py-2 bg-blue-500 rounded-xl text-white mb-3 inline-block"
+          className="px-4 py-2 bg-linear-to-r from-purple-500 to-pink-500 rounded-xl text-white mb-3 inline-block"
         >
           Add Schedule
         </Link>

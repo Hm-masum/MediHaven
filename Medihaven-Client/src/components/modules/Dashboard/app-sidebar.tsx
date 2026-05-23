@@ -110,7 +110,7 @@ const NavItems = (role: "ADMIN" | "DOCTOR" | "PATIENT") => {
           },
           {
             title: "Update Profile",
-            url: "/dashboard/admin/update-profile",
+            url: "/dashboard/admin/profile/update",
           },
         ],
       },
@@ -158,7 +158,7 @@ const NavItems = (role: "ADMIN" | "DOCTOR" | "PATIENT") => {
           },
           {
             title: "Update Profile",
-            url: "/dashboard/doctor/update-profile",
+            url: "/dashboard/doctor/profile/update",
           },
         ],
       },
@@ -200,7 +200,7 @@ const NavItems = (role: "ADMIN" | "DOCTOR" | "PATIENT") => {
           },
           {
             title: "Update Profile",
-            url: "/dashboard/patient/update-profile",
+            url: "/dashboard/patient/profile/update",
           },
         ],
       },
@@ -230,7 +230,7 @@ export function AppSidebar({
                 <Image width={40} height={40} src={logo} alt="" />
 
                 <h2 className="font-semibold md:text-2xl group-data-[collapsible=icon]:hidden">
-                  Medi<span className="text-blue-400">Haven</span>
+                  Medi<span className="bg-linear-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Haven</span>
                 </h2>
               </Link>
             </SidebarMenuButton>

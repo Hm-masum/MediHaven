@@ -62,7 +62,7 @@ export const getMe = async () => {
         "Content-Type": "application/json",
       },
     });
-    const result =await res.json();
+    const result = await res.json();
     return result;
   } catch (error: any) {
     return Error(error);
@@ -85,17 +85,20 @@ export const getAllUser = async () => {
   }
 };
 
-export const getUserStatus = async (id:string,status:string) => {
+export const getUserStatus = async (id: string, status: string) => {
   try {
     const token = await getValidToken();
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/user/${id}/status`, {
-      method:"PATCH",
-      headers: {
-        Authorization: token,
-        "Content-Type": "application/json",
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/user/${id}/status`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(status),
       },
-      body: JSON.stringify(status)
-    });
+    );
     const result = await res.json();
     return result;
   } catch (error: any) {
@@ -105,10 +108,14 @@ export const getUserStatus = async (id:string,status:string) => {
 
 export const updateMyProfile = async (userData: FormData) => {
   try {
+    const token = await getValidToken();
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/user/update-my-profile`,
       {
         method: "PATCH",
+        headers: {
+          Authorization: token,
+        },
         body: userData,
       },
     );

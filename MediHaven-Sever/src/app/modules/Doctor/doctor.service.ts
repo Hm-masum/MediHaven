@@ -95,6 +95,7 @@ const getDoctorById = async (id: string) => {
           specialties: true,
         },
       },
+      doctorSchedules: { include: { schedule: true } },
     },
   });
 

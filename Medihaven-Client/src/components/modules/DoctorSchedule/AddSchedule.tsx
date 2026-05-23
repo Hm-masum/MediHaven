@@ -67,8 +67,7 @@ export default function CreateSchedule({
 
   return (
     <div className="mx-auto w-full p-6">
-
-      <Card className="rounded-3xl border bg-white p-6 shadow-sm">
+      <Card className="rounded-3xl border p-6 shadow-sm">
         {schedules.length === 0 ? (
           <div className="flex h-60 flex-col items-center justify-center">
             <Calendar className="mb-4 h-12 w-12 text-muted-foreground/40" />
@@ -100,21 +99,21 @@ export default function CreateSchedule({
                       }
                       className={`flex items-center gap-3 rounded-2xl border px-5 py-4 transition-all ${
                         isSelected
-                          ? "border-violet-600 bg-violet-600 text-white"
-                          : "border-gray-200 bg-white hover:border-violet-300 hover:bg-violet-50"
+                          ? "bg-linear-to-r from-purple-500 to-pink-500 text-white"
+                          : "bg-purple-100 px-4 py-3 text-purple-700"
                       }`}
                     >
                       <div
                         className={`flex h-10 w-10 items-center justify-center rounded-full ${
                           isSelected
                             ? "bg-white/20"
-                            : "bg-violet-100"
+                            : "bg-purple-100"
                         }`}
                       >
                         {isSelected ? (
                           <Check className="h-5 w-5" />
                         ) : (
-                          <Clock className="h-5 w-5 text-violet-600" />
+                          <Clock className="h-5 w-5 text-purple-600" />
                         )}
                       </div>
 
@@ -122,7 +121,7 @@ export default function CreateSchedule({
                         <span
                           className={`text-xs ${
                             isSelected
-                              ? "text-violet-100"
+                              ? "text-purple-100"
                               : "text-muted-foreground"
                           }`}
                         >
@@ -131,7 +130,7 @@ export default function CreateSchedule({
                           )}
                         </span>
 
-                        <span className="font-medium">
+                        <span className="font-medium ">
                           {formatTime(
                             schedule.startDateTime
                           )}{" "}
@@ -169,7 +168,7 @@ export default function CreateSchedule({
                       .map((schedule) => (
                         <div
                           key={schedule.id}
-                          className="rounded-2xl bg-violet-100 px-4 py-3 text-violet-700"
+                          className="rounded-2xl bg-purple-100 px-4 py-3 text-purple-700"
                         >
                           <p className="text-xs">
                             {formatDate(
@@ -216,7 +215,7 @@ export default function CreateSchedule({
                     loading ||
                     selectedIds.length === 0
                   }
-                  className="bg-violet-600 hover:bg-violet-700"
+                  className="bg-linear-to-r from-purple-500 to-pink-500"
                 >
                   {loading
                     ? "Submitting..."

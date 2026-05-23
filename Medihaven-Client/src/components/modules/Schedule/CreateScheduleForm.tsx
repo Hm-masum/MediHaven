@@ -51,7 +51,7 @@ const CreateScheduleForm = () => {
   };
 
   return (
-    <div className="border border-gray-300 rounded-xl grow w-full p-5 md:p-10 bg-white min-h-[calc(100vh-64px)]">
+    <div className="border border-gray-300 rounded-xl grow w-full p-5 md:p-10 bg-white dark:bg-black min-h-[calc(100vh-64px)]">
       <SectionTitle
         title="Create"
         colorWord="Schedule"
@@ -116,7 +116,7 @@ const CreateScheduleForm = () => {
             )}
           />
 
-          <Button type="submit" className="mt-3 w-full bg-purple-700 py-3">
+          <Button type="submit" className="mt-3 w-full bg-linear-to-r from-purple-500 to-pink-500 py-3">
             {isSubmitting ? "Creating...." : "Create Schedule"}
           </Button>
         </form>

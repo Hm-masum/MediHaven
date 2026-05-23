@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { deletePatient } from "@/service/PatientService";
 import { IPatient } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
-import { Edit, Trash } from "lucide-react";
+import { Edit, Eye, Trash } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -96,13 +96,27 @@ const ManagePatient = ({ patientInfo }: { patientInfo: IPatient[] }) => {
       cell: ({ row }) => <span>{row.original?.user?.status || "N/A"}</span>,
     },
     {
+      accessorKey: "view",
+      header: "Profile",
+      cell: ({ row }) => (
+        <Button
+          className="bg-linear-to-r from-purple-500 to-pink-500"
+          onClick={() =>
+            router.push(`/dashboard/admin/patients/view/${row.original.id}`)
+          }
+        >
+          <Eye className="w-5 h-5" /> View
+        </Button>
+      ),
+    },
+    {
       accessorKey: "action",
       header: "Update",
       cell: ({ row }) => (
         <Button
-          className="bg-purple-700"
+          className="bg-linear-to-r from-purple-500 to-pink-500"
           onClick={() =>
-            router.push(`/dashboard/update-patient/${row.original.id}`)
+            router.push(`/dashboard/admin/patients/update/${row.original.id}`)
           }
         >
           <Edit className="w-5 h-5" />
@@ -114,7 +128,7 @@ const ManagePatient = ({ patientInfo }: { patientInfo: IPatient[] }) => {
       header: "Delete",
       cell: ({ row }) => (
         <button
-          className="text-red-500"
+          className="text-pink-500"
           title="Delete"
           onClick={() => handleDelete(row.original)}
         >

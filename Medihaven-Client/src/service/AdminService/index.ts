@@ -52,7 +52,7 @@ export const updateAdminById = async (id: string, userData: any) => {
       },
       body: JSON.stringify(userData),
     });
-    revalidateTag("admin", "everything");
+    revalidateTag("admin", "max");
     const result = await res.json();
     return result;
   } catch (error: any) {
@@ -70,7 +70,7 @@ export const deleteAdmin = async (id: string) => {
         "Content-Type": "application/json",
       },
     });
-    revalidateTag("admin", "everything");
+    revalidateTag("admin", "max");
     const result = await res.json();
     return result;
   } catch (error: any) {
@@ -91,7 +91,7 @@ export const softDeleteAdmin = async (id: string) => {
         },
       },
     );
-    revalidateTag("admin", "everything");
+    revalidateTag("admin", "max");
     const result = await res.json();
     return result;
   } catch (error: any) {

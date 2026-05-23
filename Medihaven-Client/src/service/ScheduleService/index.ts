@@ -14,7 +14,7 @@ export const createSchedule = async (scheduleData:any) => {
       },
       body: JSON.stringify(scheduleData)
     });
-    revalidateTag("schedules","everything");
+    revalidateTag("schedules","max");
     const result = await res.json();
     return result;
   } catch (error: any) {
@@ -70,7 +70,7 @@ export const deleteSchedule = async (id:string) => {
         "Content-Type": "application/json",
       },
     });
-    revalidateTag("schedules","everything");
+    revalidateTag("schedules","max");
     const result =await res.json();
     return result;
   } catch (error: any) {

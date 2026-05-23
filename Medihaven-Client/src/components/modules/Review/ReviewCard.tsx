@@ -7,7 +7,7 @@ import { Star, CalendarDays, UserRound } from "lucide-react";
 
 export default function ReviewCard({ reviewInfo }: { reviewInfo: IReview }) {
   return (
-      <Card className="rounded-2xl shadow-md border bg-white">
+      <Card className="rounded-2xl shadow-md border">
         <CardContent className="p-5 space-y-4">
           {/* Top Section */}
           <div className="flex items-start justify-between gap-3">
@@ -26,7 +26,7 @@ export default function ReviewCard({ reviewInfo }: { reviewInfo: IReview }) {
 
               {/* Name + Date */}
               <div className="space-y-1">
-                <h3 className="text-lg font-semibold text-slate-900">
+                <h3 className="text-lg font-semibold text-gray-600 dark:text-gray-300">
                   {reviewInfo?.patient?.name || "Anonymous"}
                 </h3>
                 <div className="flex items-center gap-1.5 text-sm text-muted-foreground mt-0.5">
@@ -58,14 +58,14 @@ export default function ReviewCard({ reviewInfo }: { reviewInfo: IReview }) {
                 )}
               </div>
 
-              <span className="text-sm text-slate-700 font-medium">
+              <span className="text-sm text-gray-600 dark:text-gray-200 font-medium">
                 {reviewInfo?.rating || 0}/5
               </span>
             </div>
           </div>
 
           {/* Review Text */}
-          <p className="text-sm italic text-slate-600 leading-relaxed">
+          <p className="text-sm italic text-gray-600 dark:text-gray-400 leading-relaxed">
             "{reviewInfo?.comment}"
           </p>
 
@@ -73,8 +73,8 @@ export default function ReviewCard({ reviewInfo }: { reviewInfo: IReview }) {
           <div className="border-t" />
 
           {/* Doctor Name */}
-          <div className="flex items-center gap-2 text-sm text-slate-600">
-            <UserRound className="h-4 w-4 text-emerald-600" />
+          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+            <UserRound className="h-4 w-4 text-pink-600" />
             <span>{reviewInfo?.doctor?.name}</span>
           </div>
         </CardContent>

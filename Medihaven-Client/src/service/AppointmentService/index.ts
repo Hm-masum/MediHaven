@@ -13,7 +13,7 @@ export const createAppointment = async (appointmentData: any) => {
       },
       body: JSON.stringify(appointmentData),
     });
-    revalidateTag("appointment", "everything");
+    revalidateTag("appointment", "max");
     const result = await res.json();
     return result;
   } catch (error: any) {
@@ -87,7 +87,7 @@ export const changeAppointmentStatus = async (id: string, status: string) => {
         body: JSON.stringify(status),
       },
     );
-    revalidateTag("appointment", "everything");
+    revalidateTag("appointment", "max");
     const result = await res.json();
     return result;
   } catch (error: any) {

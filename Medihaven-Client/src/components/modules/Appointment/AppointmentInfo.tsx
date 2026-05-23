@@ -99,8 +99,8 @@ const AppointmentInfo = ({
               onClick={() => setStatus(item === "All" ? "" : item)}
               className={`px-5 py-2 rounded-full border text-sm font-medium transition ${
                 active
-                  ? "border-green-700 text-green-700 bg-green-50"
-                  : "border-gray-300 text-gray-600 hover:bg-gray-100"
+                  ? "border-purple-600 text-purple-600 bg-purple-50"
+                  : "border-gray-300 text-gray-600 dark:text-gray-300 dark:hover:bg-gray-100"
               }`}
             >
               {item}
@@ -115,3 +115,4 @@ const AppointmentInfo = ({
 };
 
 export default AppointmentInfo;
+

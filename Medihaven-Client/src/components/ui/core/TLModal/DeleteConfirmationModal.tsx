@@ -37,7 +37,7 @@ const DeleteConfirmationModal: React.FC<DeleteModalProps> = ({
             Cancel
           </Button>
           <Button
-            variant="destructive"
+            className="bg-linear-to-r from-purple-500 to-pink-500"
             onClick={() => {
               onConfirm();
               onOpenChange(false);

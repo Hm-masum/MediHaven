@@ -42,16 +42,16 @@ const ScheduleCard = ({ schedule }: { schedule: ISchedule }) => {
       <CardContent className="p-5 space-y-4">
         {/* Title */}
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-gray-800">
+          <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
             Appointment Slot
           </h2>
 
           <div className="flex items-center gap-3">
-            <span className="text-sm px-3.5 py-1.5 rounded-full bg-green-100 text-green-700">
+            <span className="text-sm px-3.5 py-1.5 rounded-full bg-purple-100 text-purple-700">
               Active
             </span>
             <button
-              className="text-red-500"
+              className="text-pink-500"
               title="Delete"
               onClick={() => handleDelete(schedule)}
             >
@@ -62,8 +62,8 @@ const ScheduleCard = ({ schedule }: { schedule: ISchedule }) => {
 
         {/* Date */}
         <div>
-          <p className="text-sm text-gray-500">Date</p>
-          <p className="font-medium text-gray-800">
+          <p className="text-sm text-gray-500 dark:text-gray-400">Date</p>
+          <p className="font-medium text-gray-800 dark:text-gray-200">
             {new Date(schedule.startDateTime).toLocaleDateString()}
           </p>
         </div>
@@ -71,8 +71,8 @@ const ScheduleCard = ({ schedule }: { schedule: ISchedule }) => {
         {/* Time */}
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <p className="text-sm text-gray-500">Start Time</p>
-            <p className="font-medium text-gray-800">
+            <p className="text-sm text-gray-500 dark:text-gray-400">Start Time</p>
+            <p className="font-medium text-gray-800 dark:text-gray-200">
               {new Date(schedule.startDateTime).toLocaleTimeString([], {
                 hour: "2-digit",
                 minute: "2-digit",
@@ -81,8 +81,8 @@ const ScheduleCard = ({ schedule }: { schedule: ISchedule }) => {
           </div>
 
           <div>
-            <p className="text-sm text-gray-500">End Time</p>
-            <p className="font-medium text-gray-800">
+            <p className="text-sm text-gray-500 dark:text-gray-400">End Time</p>
+            <p className="font-medium text-gray-800 dark:text-gray-200">
               {new Date(schedule.endDateTime).toLocaleTimeString([], {
                 hour: "2-digit",
                 minute: "2-digit",

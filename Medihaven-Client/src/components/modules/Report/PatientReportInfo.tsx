@@ -8,7 +8,7 @@ const PatientReportInfo = async ({ patient }: { patient: IPatient }) => {
   return (
     <div
       key={patient.id}
-      className="flex items-center justify-between p-4 border rounded-md bg-white shadow-sm"
+      className="flex items-center justify-between p-4 border rounded-md bg-white dark:bg-black shadow-sm"
     >
       <div className="flex items-center gap-3">
         <Avatar className="h-10 w-10">
@@ -18,9 +18,10 @@ const PatientReportInfo = async ({ patient }: { patient: IPatient }) => {
           />
           <AvatarFallback>patient</AvatarFallback>
         </Avatar>
+
         <div>
           <h4 className="text-lg font-semibold">{patient?.name || "N/A"}</h4>
-          <p className="text-gray-500 text-xs">
+          <p className="text-gray-500 dark:text-gray-400 text-xs">
             {patient?.patientHealthData?.bloodGroup || "N/A"}
           </p>
         </div>
@@ -30,7 +31,7 @@ const PatientReportInfo = async ({ patient }: { patient: IPatient }) => {
         patient.medicalReport.map((report: IMedicalReport) => (
           <div key={report.id} className="mb-2">
             <Link href={report?.reportLink}>
-              <Button variant="outline" className="flex items-center gap-2">
+              <Button className="flex items-center gap-2 bg-linear-to-r from-purple-500 to-pink-500">
                 <Eye className="w-5 h-5" />
                 {report?.reportName}
               </Button>
@@ -38,7 +39,7 @@ const PatientReportInfo = async ({ patient }: { patient: IPatient }) => {
           </div>
         ))
       ) : (
-        <p className="text-gray-500">No reports available</p>
+        <p className="text-gray-500 dark:text-gray-400">No reports available</p>
       )}
     </div>
   );

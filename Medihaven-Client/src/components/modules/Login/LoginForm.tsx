@@ -56,6 +56,7 @@ const LoginForm = () => {
   const handleForgetPassword: SubmitHandler<FieldValues> = async (data) => {
     try {
       const result = await forgetPassword(data);
+      console.log(result)
       if (result?.success) {
         toast.success(result?.message);
       } else {
@@ -67,7 +68,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="border shadow max-w-md mx-auto border-gray-300 rounded-xl flex-grow p-5 bg-white dark:bg-gray-800">
+    <div className="border shadow max-w-md mx-auto border-gray-300 rounded-xl grow p-5 bg-white dark:bg-gray-800">
       <div className="flex items-center space-x-4 my-5">
         <Image
           width={50}
@@ -116,7 +117,7 @@ const LoginForm = () => {
 
           <Button
             type="submit"
-            className="mt-3 w-full bg-blue-700 py-3 dark:text-white"
+            className="mt-3 w-full bg-linear-to-r from-purple-500 to-pink-500 py-3 dark:text-white"
           >
             {isSubmitting ? "Logging...." : "Login"}
           </Button>
@@ -125,9 +126,9 @@ const LoginForm = () => {
 
       <Dialog>
         <DialogTrigger asChild className="flex justify-end">
-          <button className="text-blue-500 my-2">Forget Password?</button>
+          <button className="text-pink-500 my-2">Forget Password?</button>
         </DialogTrigger>
-        <DialogContent showCloseButton={false} className="md:w-[400px]">
+        <DialogContent showCloseButton={false} className="md:w-100">
           <DialogHeader>
             <DialogTitle className="font-normal">
               Please provide your email address :{" "}
@@ -154,7 +155,7 @@ const LoginForm = () => {
 
               <Button
                 type="submit"
-                className="mt-3 w-full bg-blue-700 py-3 dark:text-white"
+                className="mt-3 w-full bg-linear-to-r from-purple-500 to-pink-500 py-3 dark:text-white"
               >
                 Forget Password
               </Button>
@@ -165,7 +166,7 @@ const LoginForm = () => {
 
       <p className="text-sm text-gray-600 dark:text-gray-200 text-center my-3">
         Do not have any account?{" "}
-        <Link href="/register" className="text-blue-500 font-semibold">
+        <Link href="/register" className="text-pink-500 font-semibold">
           Register
         </Link>
       </p>

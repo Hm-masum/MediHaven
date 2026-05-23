@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+// Suppress TS error for side-effect CSS import when no global type declarations are present
+// @ts-ignore: Cannot find module or type declarations for side-effect import of './globals.css'
 import "./globals.css";
-
 import Providers from "@/providers/Providers";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/ui/core/ThemeProvider/theme-provider";

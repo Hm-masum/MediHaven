@@ -52,7 +52,7 @@ const ManagePrescription = ({
       header: "Details",
       cell: ({ row }) => (
         <Button
-          className="bg-purple-700 text-white px-3 py-1 rounded-md hover:bg-purple-600 transition-colors cursor-pointer"
+          className="bg-linear-to-r from-purple-500 to-pink-500 text-white px-3 py-1 rounded-md transition-colors cursor-pointer"
           onClick={() =>
             router.push(`/dashboard/doctor/prescriptions/${row.original.id}`)
           }

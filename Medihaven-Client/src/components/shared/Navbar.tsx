@@ -49,7 +49,7 @@ const Navbar = () => {
                     <Image width={40} height={40} src={logo} alt="" />
                     <h2 className="font-semibold text-xl md:text-3xl">
                       Medi
-                      <span className="text-blue-400">
+                      <span className="bg-linear-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                         Haven
                       </span>
                     </h2>
@@ -82,7 +82,7 @@ const Navbar = () => {
           <Image width={40} height={40} src={logo} alt="" />
           <h2 className="font-semibold text-xl md:text-2xl">
             Medi
-            <span className="text-blue-400">Haven</span>
+            <span className="bg-linear-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Haven</span>
           </h2>
         </Link>
 
@@ -121,7 +121,7 @@ const Navbar = () => {
             <Link href={`/login`}>
               <Button
                 variant="outline"
-                className="bg-blue-500 text-white font-semibold"
+                className="bg-linear-to-r from-purple-500 to-pink-500 text-white font-semibold"
               >
                 Login
               </Button>

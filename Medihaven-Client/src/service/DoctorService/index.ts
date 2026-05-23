@@ -59,7 +59,7 @@ export const updateDoctorById = async (id:string,userData:any) => {
       },
       body: JSON.stringify(userData)
     });
-    revalidateTag("doctor","everything");
+    revalidateTag("doctor","max");
     const result = await res.json();
     return result;
   } catch (error: any) {
@@ -77,7 +77,7 @@ export const deleteDoctor = async (id:string) => {
         "Content-Type": "application/json",
       },
     });
-    revalidateTag("doctor","everything");
+    revalidateTag("doctor","max");
     const result = await res.json();
     return result;
   } catch (error: any) {
@@ -95,7 +95,7 @@ export const softDeleteDoctor = async (id:string) => {
         "Content-Type": "application/json",
       },
     });
-    revalidateTag("doctor","everything");
+    revalidateTag("doctor","max");
     const result = await res.json();
     return result;
   } catch (error: any) {

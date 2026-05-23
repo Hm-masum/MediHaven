@@ -71,7 +71,7 @@ const ManageSpecialties = ({
       header: "Update",
       cell: ({ row }) => (
         <Button
-          className="bg-purple-700"
+          className="bg-linear-to-r from-purple-500 to-pink-500"
           onClick={() =>
             router.push(
               `/dashboard/admin/specialties/update/${row.original.id}`,
@@ -87,7 +87,7 @@ const ManageSpecialties = ({
       header: () => <div>Action</div>,
       cell: ({ row }) => (
         <button
-          className="text-red-500"
+          className="text-pink-500"
           title="Delete"
           onClick={() => handleDelete(row.original)}
         >

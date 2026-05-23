@@ -13,7 +13,7 @@ export const createReview = async (prescriptionData: any) => {
       },
       body: JSON.stringify(prescriptionData),
     });
-    revalidateTag("reviews","everything");
+    revalidateTag("reviews","max");
     const result = await res.json();
     return result;
   } catch (error: any) {

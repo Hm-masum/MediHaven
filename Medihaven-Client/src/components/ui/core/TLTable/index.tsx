@@ -38,7 +38,7 @@ export function TLTable<TData, TValue>({
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow
               key={headerGroup.id}
-              className="bg-gray-200 dark:bg-blue-600"
+              className="bg-gray-200 dark:bg-pink-500"
             >
               {headerGroup.headers.map((header) => {
                 return (
