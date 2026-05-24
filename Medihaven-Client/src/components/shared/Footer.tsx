@@ -14,14 +14,14 @@ const Footer = () => {
     { href: "#", icon: X },
   ];
   return (
-    <footer className="bg-white dark:bg-gray-700 border-t border-gray-200 py-12 text-gray-600 dark:text-white">
+    <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 py-12 text-gray-600 dark:text-white">
       <div className="max-w-6xl mx-auto px-4 text-center">
         <div className="flex flex-col items-center mb-6">
           <div className="flex items-center space-x-2">
             <div className="text-2xl space-x-1 flex items-center">
               <Image width={35} height={35} src={logo} alt="logo" />
               <h2 className="font-semibold md:text-2xl">
-                Medi<span className="text-blue-400">Haven</span>
+                Medi<span className="bg-linear-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Haven</span>
               </h2>
             </div>
           </div>

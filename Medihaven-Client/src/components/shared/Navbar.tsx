@@ -24,23 +24,23 @@ import { useEffect, useState } from "react";
 const Navbar = () => {
   const pathname = usePathname();
   const { user } = useUser();
-  const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   if (!mounted) return null;
 
   return (
-    <div className="px-3 py-2 backdrop-blur-3xl bg-white/55 dark:bg-white/35 sticky top-0 z-10">
+    <div className="px-3 py-3 backdrop-blur-2xl bg-white/20 dark:bg-white/45 border sticky top-0 z-50">
       <div className="md:max-w-7xl mx-auto flex items-center justify-between">
         {/* menu bar */}
         <button className="lg:hidden p-2 flex items-center justify-end">
           <Sheet>
             <SheetTrigger asChild>
-              <Menu className="border-[#003060] p-1.5 md:px-3 md:py-1 rounded-md text-5xl md:text-6xl" />
+              <Menu className="p-2 rounded-md w-10 h-10 md:w-12 md:h-12" />
             </SheetTrigger>
             <SheetContent side="left">
               <SheetHeader>
@@ -63,7 +63,7 @@ const Navbar = () => {
                       href={item.path}
                       className={
                         pathname == item.path
-                          ? "text-blue-700 dark:text-blue-300 border-b-2 border-blue-700 dark:border-blue-300"
+                          ? "bg-linear-to-r from-purple-500 dark:from-purple-200 to-pink-500 bg-clip-text text-transparent"
                           : ""
                       }
                     >
@@ -78,11 +78,13 @@ const Navbar = () => {
         </button>
 
         {/* logo */}
-        <Link href="/" className="flex items-center w-[25%]">
+        <Link href="/" className="flex items-center md:w-[25%]">
           <Image width={40} height={40} src={logo} alt="" />
           <h2 className="font-semibold text-xl md:text-2xl">
             Medi
-            <span className="bg-linear-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Haven</span>
+            <span className="bg-linear-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+              Haven
+            </span>
           </h2>
         </Link>
 
@@ -94,7 +96,7 @@ const Navbar = () => {
               href={item.path}
               className={
                 pathname == item.path
-                  ? "text-blue-700 dark:text-blue-300 border-b-2 border-blue-700 dark:border-blue-300"
+                  ? "bg-linear-to-r from-purple-500 dark:from-purple-200 to-pink-500 bg-clip-text text-transparent"
                   : ""
               }
             >
@@ -120,8 +122,7 @@ const Navbar = () => {
           ) : (
             <Link href={`/login`}>
               <Button
-                variant="outline"
-                className="bg-linear-to-r from-purple-500 to-pink-500 text-white font-semibold"
+                className="px-3 md:px-6 py-3 rounded-full bg-linear-to-r from-purple-500 to-pink-500 text-white font-semibold border border-transparent transition-all hover:from-transparent hover:to-transparent hover:border-purple-500 hover:text-purple-500 hover:bg-white"
               >
                 Login
               </Button>
