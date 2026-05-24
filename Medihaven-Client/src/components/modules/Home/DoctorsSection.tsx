@@ -39,7 +39,7 @@ const DoctorsSection = async() => {
         </div>
 
         {/* Doctors Grid */}
-        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {doctors?.data.map((doctor:IDoctor) => (
             <PublicDoctorCard key={doctor.id} doctor={doctor}/>
           ))}

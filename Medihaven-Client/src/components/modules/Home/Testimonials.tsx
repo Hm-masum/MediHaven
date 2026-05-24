@@ -42,7 +42,7 @@ export default function TestimonialsSection() {
             Patient Stories
           </div>
 
-          <h2 className="font-serif text-2xl font-bold tracking-tight text-[#1a0e2e] md:text-5xl">
+          <h2 className="font-serif text-2xl font-bold tracking-tight md:text-5xl">
             What Our Patients{" "}
             <span className="bg-linear-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
               Are Saying
