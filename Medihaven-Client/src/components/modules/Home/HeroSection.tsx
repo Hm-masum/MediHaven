@@ -3,8 +3,8 @@
 import Link from "next/link";
 import {
   ArrowRight,
-  UserRound,
   CircleCheckBig,
+  Stethoscope,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -19,7 +19,7 @@ export default function HeroSection() {
 
       <div className="pointer-events-none absolute left-[40%] top-[40%] h-75 w-75 rounded-full bg-purple-700/10 blur-3xl" />
 
-      <div className="mx-auto grid max-w-6xl items-center gap-16 py-10 lg:grid-cols-2">
+      <div className="mx-auto grid max-w-6xl items-center gap-20 md:gap-16 py-14 lg:grid-cols-2">
         {/* Left Content */}
         <div>
           <h5 className="mb-6 flex items-center rounded-full border border-purple-200 bg-purple-200 px-4 py-1 text-sm font-medium text-purple-700 w-fit justify-center mx-auto md:mx-0">
@@ -59,14 +59,14 @@ export default function HeroSection() {
               variant="outline"
               className="h-12 rounded-full border-purple-200 px-7 text-sm font-semibold text-purple-700 hover:bg-purple-50"
             >
-              <Link href="#doctors">Meet Our Doctors</Link>
+              <Link href="/doctors">Meet Our Doctors</Link>
             </Button>
           </div>
 
           {/* Stats */}
-          <div className="flex flex-wrap items-center gap-6">
+          <div className="flex flex-wrap items-center gap-2 md:gap-6">
             <div>
-              <div className="bg-gradient-to-r from-violet-500 to-pink-500 bg-clip-text font-serif text-3xl font-bold text-transparent">
+              <div className="bg-linear-to-r from-violet-500 to-pink-500 bg-clip-text font-serif text-3xl font-bold text-transparent">
                 10K+
               </div>
 
@@ -78,10 +78,9 @@ export default function HeroSection() {
             <div className="h-12 w-px bg-violet-200" />
 
             <div>
-              <div className="bg-gradient-to-r from-violet-500 to-pink-500 bg-clip-text font-serif text-3xl font-bold text-transparent">
+              <div className="bg-linear-to-r from-purple-500 to-pink-500 bg-clip-text font-serif text-3xl font-bold text-transparent">
                 500+
               </div>
-
               <div className="text-sm font-medium text-[#7c5fa0]">
                 Expert Doctors
               </div>
@@ -90,7 +89,7 @@ export default function HeroSection() {
             <div className="h-12 w-px bg-violet-200" />
 
             <div>
-              <div className="bg-gradient-to-r from-violet-500 to-pink-500 bg-clip-text font-serif text-3xl font-bold text-transparent">
+              <div className="bg-linear-to-r from-violet-500 to-pink-500 bg-clip-text font-serif text-3xl font-bold text-transparent">
                 4.9★
               </div>
 
@@ -104,13 +103,13 @@ export default function HeroSection() {
         {/* Right Visual */}
         <div className="relative flex items-center justify-center">
           {/* Rings */}
-          <div className="absolute h-[340px] w-[340px] rounded-full border-2 border-dashed border-violet-200" />
+          <div className="absolute h-56 w-56 md:h-85 md:w-85 rounded-full border-2 border-dashed border-purple-200" />
 
-          <div className="absolute h-[400px] w-[400px] rounded-full border border-pink-200/50" />
+          <div className="absolute h-64 w-64 md:h-100 md:w-100 rounded-full border border-pink-200/50" />
 
           {/* Main Circle */}
           <div className="relative z-10 animate-[float_4s_ease-in-out_infinite]">
-            <div className="flex h-[280px] w-[280px] items-center justify-center overflow-hidden rounded-full border-4 border-violet-200 bg-gradient-to-br from-violet-100 to-pink-100">
+            <div className="flex h-48 w-48 md:h-70 md:w-70 items-center justify-center overflow-hidden rounded-full border-4 border-purple-200 bg-linear-to-br from-purple-100 to-pink-100">
               {/* Doctor Illustration */}
               <svg
                 width="160"
@@ -129,7 +128,6 @@ export default function HeroSection() {
                   fill="white"
                   opacity="0.9"
                 />
-
                 <rect
                   x="30"
                   y="110"
@@ -138,7 +136,6 @@ export default function HeroSection() {
                   fill="url(#doctorGrad)"
                   opacity="0.15"
                 />
-
                 <rect
                   x="90"
                   y="110"
@@ -147,7 +144,6 @@ export default function HeroSection() {
                   fill="url(#doctorGrad)"
                   opacity="0.15"
                 />
-
                 {/* Collar */}
                 <path
                   d="M65 110 L80 130 L95 110"
@@ -155,7 +151,6 @@ export default function HeroSection() {
                   strokeWidth="2"
                   fill="none"
                 />
-
                 {/* Stethoscope */}
                 <circle
                   cx="80"
@@ -165,14 +160,12 @@ export default function HeroSection() {
                   strokeWidth="2"
                   fill="none"
                 />
-
                 <path
                   d="M70 150 Q60 160 60 170 Q60 180 70 180 Q80 180 80 170"
                   stroke="#ec4899"
                   strokeWidth="2"
                   fill="none"
                 />
-
                 {/* Head */}
                 <ellipse
                   cx="80"
@@ -181,13 +174,11 @@ export default function HeroSection() {
                   ry="36"
                   fill="#f8d5c0"
                 />
-
                 {/* Hair */}
                 <path
                   d="M50 72 Q50 40 80 38 Q110 40 110 72"
                   fill="#4b2b7c"
                 />
-
                 {/* Eyes */}
                 <circle
                   cx="70"
@@ -195,14 +186,12 @@ export default function HeroSection() {
                   r="3"
                   fill="#4b2b7c"
                 />
-
                 <circle
                   cx="90"
                   cy="68"
                   r="3"
                   fill="#4b2b7c"
                 />
-
                 {/* Smile */}
                 <path
                   d="M72 82 Q80 88 88 82"
@@ -246,26 +235,25 @@ export default function HeroSection() {
           </div>
 
           {/* Floating Card 1 */}
-          <div className="absolute right-0 top-4 rounded-2xl border border-violet-100 bg-white p-4 shadow-[0_8px_32px_rgba(168,85,247,0.15)]">
+          <div className="absolute right-0 md:-right-10 -top-12 md:top-6 rounded-2xl border border-linear-100 bg-white p-4 shadow-[0_8px_32px_rgba(168,85,247,0.15)]">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-r from-violet-500 to-pink-500">
-                <UserRound className="h-5 w-5 text-white" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-r from-purple-500 to-pink-500">
+                <Stethoscope className="h-5 w-5 text-white" />
               </div>
 
               <div>
                 <div className="text-xs text-gray-400">
-                  Next Available
+                  Live Consultation
                 </div>
-
                 <div className="text-sm font-semibold text-[#1a0e2e]">
-                  Dr. Sarah Today
+                  120+ Doctors Online
                 </div>
               </div>
             </div>
           </div>
 
           {/* Floating Card 2 */}
-          <div className="absolute bottom-6 left-0 rounded-2xl border border-violet-100 bg-white p-4 shadow-[0_8px_32px_rgba(168,85,247,0.15)]">
+          <div className="absolute -bottom-12 md:bottom-6 left-0 md:-left-10 rounded-2xl border border-violet-100 bg-white p-4 shadow-[0_8px_32px_rgba(168,85,247,0.15)]">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-r from-pink-200 to-pink-300">
                 <CircleCheckBig className="h-5 w-5 text-violet-700" />
