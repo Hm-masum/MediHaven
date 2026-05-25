@@ -61,7 +61,7 @@ export default function PublicDoctorCard({ doctor }: { doctor: IDoctor }) {
           asChild
           className="h-11 w-full rounded-xl bg-linear-to-r from-purple-500 to-pink-500 text-sm font-medium text-white hover:opacity-90"
         >
-          <Link href="/book">Book Now</Link>
+          <Link href={`/doctors/${doctor?.id}`}>Book Now</Link>
         </Button>
       </CardContent>
     </Card>

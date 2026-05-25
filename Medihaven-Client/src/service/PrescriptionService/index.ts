@@ -2,7 +2,7 @@
 
 import { getValidToken } from "@/lib/verifyToken";
 import { revalidateTag } from "next/cache";
-
+ 
 export const createPrescription = async (prescriptionData: any) => {
   try {
     const token = await getValidToken();
@@ -11,6 +11,7 @@ export const createPrescription = async (prescriptionData: any) => {
       {
         method: "POST",
         headers: {
+          "Content-Type": "application/json",
           Authorization: token,
         },
         body: JSON.stringify(prescriptionData),

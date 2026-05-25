@@ -56,7 +56,6 @@ const LoginForm = () => {
   const handleForgetPassword: SubmitHandler<FieldValues> = async (data) => {
     try {
       const result = await forgetPassword(data);
-      console.log(result)
       if (result?.success) {
         toast.success(result?.message);
       } else {

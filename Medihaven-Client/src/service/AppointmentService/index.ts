@@ -9,6 +9,7 @@ export const createAppointment = async (appointmentData: any) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/appointment`, {
       method: "POST",
       headers: {
+        "Content-Type": "application/json",
         Authorization: token,
       },
       body: JSON.stringify(appointmentData),
