@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 // Suppress TS error for side-effect CSS import when no global type declarations are present
 // @ts-ignore: Cannot find module or type declarations for side-effect import of './globals.css'
 import "./globals.css";
@@ -7,15 +7,16 @@ import Providers from "@/providers/Providers";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/ui/core/ThemeProvider/theme-provider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const mono = JetBrains_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
 });
+
 
 export const metadata: Metadata = {
   title: "MediHaven",
@@ -30,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${mono.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"

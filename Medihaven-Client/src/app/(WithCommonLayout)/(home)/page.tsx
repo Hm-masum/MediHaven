@@ -7,7 +7,6 @@ import TestimonialsSection from "@/components/modules/Home/Testimonials";
 import WhyMediHaven from "@/components/modules/Home/WhyMediHaven";
 
 const HomePage = async() => {
-
   return (
     <div>
       <HeroSection/>
