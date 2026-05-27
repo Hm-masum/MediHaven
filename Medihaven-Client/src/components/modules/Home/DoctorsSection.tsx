@@ -40,7 +40,7 @@ const DoctorsSection = async() => {
 
         {/* Doctors Grid */}
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {doctors?.data.map((doctor:IDoctor) => (
+          {doctors?.data.slice(0, 8).map((doctor:IDoctor) => (
             <PublicDoctorCard key={doctor.id} doctor={doctor}/>
           ))}
         </div>

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Star, MapPin, Phone, Mail } from "lucide-react";
+import { Star, MapPin, Phone, Mail, Cross, X } from "lucide-react";
 import { IDoctor } from "@/types/doctor";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -206,10 +206,10 @@ export default function PublicDoctorDetails({ doctor }: { doctor: IDoctor }) {
                           </div>
 
                           <Button
-                            className="bg-linear-to-r from-purple-500 to-pink-500"
+                            className="bg-linear-to-r from-purple-500 to-pink-500 text-white"
                             onClick={() => setSelectedDoctor(null)}
                           >
-                            Close
+                            <X className="font-semibold"/>
                           </Button>
                         </div>
 

@@ -10,6 +10,7 @@ router.get(
   auth(UserRole.DOCTOR,UserRole.PATIENT),
   PaymentController.getMyPayments,
 );
+
 router.get("/ipn", PaymentController.validatePayment);
 router.post("/init-payment/:appointmentId", PaymentController.initPayment);
 

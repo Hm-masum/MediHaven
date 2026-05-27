@@ -6,7 +6,7 @@ import { revalidateTag } from "next/cache";
 export const initPayment = async (appointmentId: string) => {
   try {
     const token = await getValidToken();
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/payment/${appointmentId}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/payment/init-payment/${appointmentId}`, {
       method: "POST",
       headers: {
         Authorization: token,

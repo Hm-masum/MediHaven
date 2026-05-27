@@ -8,9 +8,10 @@ import {
 import { paginationHelper } from "../../../helper/paginationHelper";
 import prisma from "../../../shared/prisma";
 import { IAuthUser } from "../../interfaces/common";
-import { transactionId, videoCallingId } from "./appointment.constant";
 import { IPaginationOptions } from "../../interfaces/pagination";
 import ApiError from "../../errors/ApiError";
+import { randomUUID } from "crypto";
+
 
 const createAppointment = async (user: IAuthUser, payload: any) => {
   const patientData = await prisma.patient.findUniqueOrThrow({
@@ -32,6 +33,22 @@ const createAppointment = async (user: IAuthUser, payload: any) => {
       isBooked: false,
     },
   });
+
+  const videoCallingId: string = randomUUID();
+  const today = new Date();
+  const transactionId =
+    "Medi-Haven-" +
+    today.getFullYear() +
+    "-" +
+    today.getMonth() +
+    "-" +
+    today.getDate() +
+    "-" +
+    today.getHours() +
+    "-" +
+    today.getMinutes() +
+    "-" +
+    today.getSeconds();
 
   const result = await prisma.$transaction(async (ts) => {
     const appointmentData = await ts.appointment.create({

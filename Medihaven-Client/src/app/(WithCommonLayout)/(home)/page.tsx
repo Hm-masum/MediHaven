@@ -11,8 +11,8 @@ const HomePage = async() => {
     <div>
       <HeroSection/>
       <SpecialtiesSection/>
-      <WhyMediHaven/>
       <DoctorsSection/>
+      <WhyMediHaven/>
       <HowItWorksSection/>
       <TestimonialsSection/>
       <CTASection/>
