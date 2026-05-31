@@ -56,8 +56,7 @@ const AdminRegisterForm = () => {
         router.push("/login");
         toast.success(result?.message);
       } else {
-        toast.error("Something is wrong!");
-        console.log(result.message)
+        toast.error(result?.message);
       }
     } catch (err: any) {
       toast.error(err?.message);

@@ -47,7 +47,6 @@ export default function CreateSchedule({
       const payload = {
         scheduleIds: selectedIds,
       };
-      console.log("Payload for creating schedule:", payload);
 
       const res = await createDoctorSchedule(payload)
       if(res.success){

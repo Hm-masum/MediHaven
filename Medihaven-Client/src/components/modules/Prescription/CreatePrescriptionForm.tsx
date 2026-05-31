@@ -27,8 +27,11 @@ export default function CreatePrescriptionForm({
       };
 
       const result = await createPrescription(payload);
-      if (result.success) {
-        toast.success(result.message);
+      if (result?.success) {
+        toast.success(result?.message);
+      }
+      else{
+        toast.error(result?.message);
       }
     } catch (err: any) {
       toast.error(err?.message);
@@ -39,7 +42,7 @@ export default function CreatePrescriptionForm({
 
   return (
     <div className="max-w-2xl mx-auto p-6 border rounded-xl space-y-6">
-      <h2 className="text-2xl font-bold">Create Prescription</h2>
+      <h2 className="text-2xl font-bold bg-linear-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Create Prescription</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>

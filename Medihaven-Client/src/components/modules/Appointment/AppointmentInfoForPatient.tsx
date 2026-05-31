@@ -26,25 +26,28 @@ const AppointmentInfoForPatient = ({
       if (status && status !== "All") {
         params.set("status", status.toUpperCase());
       }
-      
+
       router.replace(`${pathname}?${params.toString()}`, { scroll: false });
     }, 400);
     return () => clearTimeout(timer);
   }, [status, router]);
 
-  const makePayment = async (appointment:IAppointment) =>{
-    try{
-        const result = await initPayment(appointment.id)
-        if(result?.success){
-            window.location.href = result.data.paymentUrl;
-        }
-        else{
-             toast.error(result?.message);
-        }
-    }catch(err:any){
-        toast.error(err?.message);
+  const makePayment = async (appointment: IAppointment) => {
+    try {
+      const result = await initPayment(appointment.id);
+      if (result?.success) {
+        window.location.href = result.data.paymentUrl;
+      } else {
+        toast.error(result?.message);
+      }
+    } catch (err: any) {
+      toast.error(err?.message);
     }
-  }
+  };
+
+  const videoCall = (link: string) => {
+    window.open(link, "_blank");
+  };
 
   const columns: ColumnDef<IAppointment>[] = [
     {
@@ -88,7 +91,7 @@ const AppointmentInfoForPatient = ({
       cell: ({ row }) => (
         <span>
           {row.original?.paymentStatus === "UNPAID" ? (
-            <Button onClick={()=>makePayment(row?.original)}>Pay Now</Button>
+            <Button onClick={() => makePayment(row?.original)}>Pay Now</Button>
           ) : (
             row.original?.paymentStatus
           )}
@@ -100,10 +103,18 @@ const AppointmentInfoForPatient = ({
       header: "Video Call",
       cell: ({ row }) => (
         <span>
-          {row.original?.paymentStatus === "PAID" &&  row.original?.status==="SCHEDULED"? (
-            <Button className="bg-linear-to-r from-purple-500 to-pink-500">Call Now</Button>
+          {row.original?.paymentStatus === "PAID" &&
+          row.original?.status === "SCHEDULED" ? (
+            <Button
+              onClick={() => videoCall(row.original?.videoCallingId)}
+              className="bg-linear-to-r from-purple-500 to-pink-500"
+            >
+              Call Now
+            </Button>
           ) : (
-            row.original?.paymentStatus
+            <span className="text-green-600 font-medium">
+              Call is not avilable
+            </span>
           )}
         </span>
       ),

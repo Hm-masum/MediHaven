@@ -2,10 +2,14 @@
 
 import { getValidToken } from "@/lib/verifyToken";
 import { revalidateTag } from "next/cache";
+import { toast } from "sonner";
 
 export const createAppointment = async (appointmentData: any) => {
   try {
     const token = await getValidToken();
+    if(!token){
+      toast.error("Please Login First!")
+    }
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/appointment`, {
       method: "POST",
       headers: {

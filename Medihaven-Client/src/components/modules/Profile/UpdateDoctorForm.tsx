@@ -89,7 +89,6 @@ export default function UpdateDoctorForm({
       formData.append("data", JSON.stringify(updatedData));
       if (data.profilePhoto && data.profilePhoto.length > 0) {
         formData.append("file", data.profilePhoto[0]);
-        console.log("Image file added to formData:", data.profilePhoto[0]);
       }
 
       const res = await updateMyProfile(formData);

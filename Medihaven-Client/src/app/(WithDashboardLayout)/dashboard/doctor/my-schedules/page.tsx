@@ -5,8 +5,6 @@ import Link from "next/link";
 const MyDoctorSchedulePage = async () => {
   const { data: doctorScheduleInfo } = await getMySchedule();
 
-  console.log(doctorScheduleInfo);
-
   return (
     <div>
       <div className="flex justify-end">

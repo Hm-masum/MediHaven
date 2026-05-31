@@ -17,18 +17,18 @@ const initPayment = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+/*
+const validatePayment = catchAsync(async (req: Request, res: Response) => {
+  const result = await PaymentService.validatePayment(req.query);
 
-// const validatePayment = catchAsync(async (req: Request, res: Response) => {
-//   const result = await PaymentService.validatePayment(req.query);
-
-//   sendResponse(res, {
-//     statusCode: httpStatus.OK,
-//     success: true,
-//     message: "Validate Payment successfully",
-//     data: result,
-//   });
-// });
-
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Validate Payment successfully",
+    data: result,
+  });
+});
+*/
 
 const validatePayment = catchAsync(async (req: Request, res: Response) => {
   await PaymentService.validatePayment(req.body);
