@@ -85,7 +85,7 @@ export const changeAppointmentStatus = async (id: string, status: string) => {
           Authorization: token,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(status),
+        body: JSON.stringify({status}),
       },
     );
     revalidateTag("appointment", "max");

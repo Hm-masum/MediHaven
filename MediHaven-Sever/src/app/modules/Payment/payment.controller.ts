@@ -17,15 +17,33 @@ const initPayment = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const validatePayment = catchAsync(async (req: Request, res: Response) => {
-  const result = await PaymentService.validatePayment(req.query);
 
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: "Validate Payment successfully",
-    data: result,
-  });
+// const validatePayment = catchAsync(async (req: Request, res: Response) => {
+//   const result = await PaymentService.validatePayment(req.query);
+
+//   sendResponse(res, {
+//     statusCode: httpStatus.OK,
+//     success: true,
+//     message: "Validate Payment successfully",
+//     data: result,
+//   });
+// });
+
+
+const validatePayment = catchAsync(async (req: Request, res: Response) => {
+  await PaymentService.validatePayment(req.body);
+
+  res.redirect(
+    `http://localhost:3000/success?tran_id=${req.body.tran_id}&amount=${req.body.amount}`
+  );
+});
+
+const failPayment = catchAsync(async (req: Request, res: Response) => {
+  res.redirect(`http://localhost:3000/fail`);
+});
+
+const cancelPayment = catchAsync(async (req: Request, res: Response) => {
+  res.redirect(`http://localhost:3000/cancel`);
 });
 
 const getAllPayments = catchAsync(async (req: Request, res: Response) => {
@@ -57,6 +75,8 @@ const getMyPayments = catchAsync(
 export const PaymentController = {
   initPayment,
   validatePayment,
+  cancelPayment,
+  failPayment,
   getAllPayments,
   getMyPayments
 };

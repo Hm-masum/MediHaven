@@ -3,14 +3,15 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { TLTable } from "@/components/ui/core/TLTable";
-import { initPayment } from "@/service/PaymentService";
+import { changeAppointmentStatus } from "@/service/AppointmentService";
 import { IAppointment } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
+import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
-const AppointmentInfoForPatient = ({
+const AppointmentInfoForDoctor = ({
   appointmentInfo,
 }: {
   appointmentInfo: IAppointment[];
@@ -26,25 +27,28 @@ const AppointmentInfoForPatient = ({
       if (status && status !== "All") {
         params.set("status", status.toUpperCase());
       }
-      
+
       router.replace(`${pathname}?${params.toString()}`, { scroll: false });
     }, 400);
+
     return () => clearTimeout(timer);
   }, [status, router]);
 
-  const makePayment = async (appointment:IAppointment) =>{
-    try{
-        const result = await initPayment(appointment.id)
-        if(result?.success){
-            window.location.href = result.data.paymentUrl;
-        }
-        else{
-             toast.error(result?.message);
-        }
-    }catch(err:any){
-        toast.error(err?.message);
+  const handleStatusChange = async (
+    appointmentId: string,
+    statusValue: string,
+  ) => {
+    try {
+      const result = await changeAppointmentStatus(appointmentId, statusValue);
+      if (result.success) {
+        toast.success(result?.message);
+      } else {
+        toast.error(result?.message);
+      }
+    } catch (err: any) {
+      toast.error(err?.message);
     }
-  }
+  };
 
   const columns: ColumnDef<IAppointment>[] = [
     {
@@ -85,28 +89,7 @@ const AppointmentInfoForPatient = ({
     {
       accessorKey: "payment",
       header: "Payment",
-      cell: ({ row }) => (
-        <span>
-          {row.original?.paymentStatus === "UNPAID" ? (
-            <Button onClick={()=>makePayment(row?.original)}>Pay Now</Button>
-          ) : (
-            row.original?.paymentStatus
-          )}
-        </span>
-      ),
-    },
-    {
-      accessorKey: "video-call",
-      header: "Video Call",
-      cell: ({ row }) => (
-        <span>
-          {row.original?.paymentStatus === "PAID" &&  row.original?.status==="SCHEDULED"? (
-            <Button className="bg-linear-to-r from-purple-500 to-pink-500">Call Now</Button>
-          ) : (
-            row.original?.paymentStatus
-          )}
-        </span>
-      ),
+      cell: ({ row }) => <span>{row.original?.paymentStatus || "N/A"}</span>,
     },
     {
       accessorKey: "status",
@@ -114,11 +97,47 @@ const AppointmentInfoForPatient = ({
       cell: ({ row }) => <span>{row.original?.status || "N/A"}</span>,
     },
     {
-      accessorKey: "fee",
-      header: "Fee",
+      accessorKey: "change-status",
+      header: "Change Status",
       cell: ({ row }) => (
-        <span>{row.original?.doctor?.appointmentFee || "N/A"}</span>
+        <div>
+          <select
+            className="border rounded px-2 py-1 text-sm"
+            defaultValue={row.original.status}
+            onChange={(e) =>
+              handleStatusChange(row.original.id, e.target.value)
+            }
+          >
+            <option value="ALL">All</option>
+            <option value="SCHEDULED">SCHEDULED</option>
+            <option value="ONPROGRESS">ONPROGRESS</option>
+            <option value="COMPLETED">COMPLETED</option>
+            <option value="CANCELED">CANCELED</option>
+          </select>
+        </div>
       ),
+    },
+    {
+      accessorKey: "prescription",
+      header: "Prescription",
+      cell: ({ row }) => {
+        const { status, prescription } = row.original;
+        if (status !== "COMPLETED") {
+          return (
+            <span className="text-muted-foreground">
+              Appointment Not Completed
+            </span>
+          );
+        }
+        if (status === "COMPLETED" && !prescription) {
+          return <Button className="bg-linear-to-r from-purple-500 to-pink-500"><Link  href={`/dashboard/doctor/prescriptions/create/${row.original.id}`}>Create Prescription</Link></Button>;
+        }
+        return (
+          <span className="text-green-600 font-medium">
+            Prescription Available
+          </span>
+        );
+      },
     },
   ];
 
@@ -129,6 +148,7 @@ const AppointmentInfoForPatient = ({
       <div className="flex flex-wrap gap-3">
         {tabs.map((item) => {
           const active = (item === "All" && status === "") || item === status;
+
           return (
             <button
               key={item}
@@ -150,4 +170,4 @@ const AppointmentInfoForPatient = ({
   );
 };
 
-export default AppointmentInfoForPatient;
+export default AppointmentInfoForDoctor;

@@ -13,14 +13,12 @@ const PaymentFail = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950 px-4">
       <div className="max-w-md w-full bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-8 text-center space-y-6">
-        {/* Icon */}
         <div className="flex justify-center">
           <div className="w-20 h-20 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
             <XCircle className="w-10 h-10 text-red-600 dark:text-red-400" />
           </div>
         </div>
 
-        {/* Title */}
         <div className="space-y-2">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
             Payment Failed!
@@ -30,7 +28,6 @@ const PaymentFail = () => {
           </p>
         </div>
 
-        {/* Transaction Info */}
         {tranId && (
           <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 text-left">
             <div className="flex justify-between items-center">
@@ -41,6 +38,7 @@ const PaymentFail = () => {
                 {tranId}
               </span>
             </div>
+
             <div className="flex justify-between items-center mt-3">
               <span className="text-sm text-gray-500 dark:text-gray-400">
                 Status
@@ -52,15 +50,15 @@ const PaymentFail = () => {
           </div>
         )}
 
-        {/* Buttons */}
         <div className="flex flex-col gap-3">
           <Button
-            onClick={() => router.push("/dashboard/patient/appointments")}
-            className="w-full gap-2"
+            onClick={() => router.push("/dashboard/patient/my-appointment")}
+            className="w-full gap-2 bg-linear-to-r from-purple-500 to-pink-500"
           >
             <RefreshCw className="w-4 h-4" />
             Try Again
           </Button>
+
           <Link href="/">
             <Button variant="outline" className="w-full gap-2">
               <ArrowLeft className="w-4 h-4" />

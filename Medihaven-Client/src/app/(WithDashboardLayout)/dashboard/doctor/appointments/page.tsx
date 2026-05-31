@@ -1,4 +1,4 @@
-import AppointmentInfo from "@/components/modules/Appointment/AppointmentInfo";
+import AppointmentInfoForDoctor from "@/components/modules/Appointment/AppointmentInfoForDoctor";
 import { getMyAppointment } from "@/service/AppointmentService";
 
 const DoctorApppointmentInfoPage = async ({searchParams}: {searchParams: Promise<{ status?: string }>}) => {
@@ -8,7 +8,7 @@ const DoctorApppointmentInfoPage = async ({searchParams}: {searchParams: Promise
   
   return (
     <div>
-      <AppointmentInfo appointmentInfo={appointmentInfo?.data} />
+      <AppointmentInfoForDoctor appointmentInfo={appointmentInfo?.data} />
     </div>
   );
 };

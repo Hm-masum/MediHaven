@@ -20,6 +20,24 @@ export const initPayment = async (appointmentId: string) => {
   }
 };
 
+export const validatePayment = async (query: string) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/payment/ipn?${query}`,
+      {
+        method: "POST",
+        cache: "no-store",
+      }
+    );
+    revalidateTag("payments", "max");
+    const result = await res.json();
+
+    return result;
+  } catch (error: any) {
+    return Error(error);
+  }
+};
+
 export const getAllPayments = async () => {
   try {
     const token = await getValidToken();
@@ -57,3 +75,4 @@ export const getMyPayments = async () => {
     return Error(error);
   }
 };
+

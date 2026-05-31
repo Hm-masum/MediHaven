@@ -190,6 +190,7 @@ const getMyAppointment = async (
       },
       doctor: true,
       schedule: true,
+      prescription:true
     },
   });
 

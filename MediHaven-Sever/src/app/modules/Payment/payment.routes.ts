@@ -10,8 +10,14 @@ router.get(
   auth(UserRole.DOCTOR,UserRole.PATIENT),
   PaymentController.getMyPayments,
 );
+// from course
+// router.get("/ipn", PaymentController.validatePayment);
 
-router.get("/ipn", PaymentController.validatePayment);
+// from cloude
+router.post("/success", PaymentController.validatePayment);
+router.post("/fail", PaymentController.failPayment);
+router.post("/cancel", PaymentController.cancelPayment);
+
 router.post("/init-payment/:appointmentId", PaymentController.initPayment);
 
 export const PaymentRoutes = router;

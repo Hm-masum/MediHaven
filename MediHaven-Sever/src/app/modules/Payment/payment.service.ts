@@ -45,7 +45,14 @@ const validatePayment = async (payload: any) => {
   //   };
   // }
 
-  const response = payload;
+  const tranId = payload?.tran_id;
+
+  if (!tranId) {
+    throw new Error("tran_id missing from SSL response");
+  }
+
+  const response = await SSLService.validatePayment(payload);
+
 
   await prisma.$transaction(async (tx) => {
     const updatedPaymentData = await tx.payment.update({
