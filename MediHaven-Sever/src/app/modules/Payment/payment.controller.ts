@@ -34,16 +34,16 @@ const validatePayment = catchAsync(async (req: Request, res: Response) => {
   await PaymentService.validatePayment(req.body);
 
   res.redirect(
-    `http://localhost:3000/success?tran_id=${req.body.tran_id}&amount=${req.body.amount}`
+    `https://medihaven123.vercel.app/success?tran_id=${req.body.tran_id}&amount=${req.body.amount}`
   );
 });
 
 const failPayment = catchAsync(async (req: Request, res: Response) => {
-  res.redirect(`http://localhost:3000/fail`);
+  res.redirect(`https://medihaven123.vercel.app/fail`);
 });
 
 const cancelPayment = catchAsync(async (req: Request, res: Response) => {
-  res.redirect(`http://localhost:3000/cancel`);
+  res.redirect(`https://medihaven123.vercel.app/cancel`);
 });
 
 const getAllPayments = catchAsync(async (req: Request, res: Response) => {

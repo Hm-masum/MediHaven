@@ -19,7 +19,7 @@ export const middleware = async(request: NextRequest)=>{
             return NextResponse.next()
         }else{
             return NextResponse.redirect(
-                new URL(`http://localhost:3000/login?redirect=${pathname}`)
+                new URL(`https://medihaven123.vercel.app/login?redirect=${pathname}`)
             )
         }
     }

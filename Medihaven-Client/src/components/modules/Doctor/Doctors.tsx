@@ -17,7 +17,7 @@ type Meta = {
 const Doctors = () => {
   const [doctors, setDoctors] = useState<IDoctor[]>([]);
   const [meta, setMeta] = useState<Meta | null>(null);
-  const [, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [allSpecialties, setAllSpecialties] = useState<ISpecialties[]>([]);
 
   // Filter states
@@ -26,7 +26,7 @@ const Doctors = () => {
   const [specialties, setSpecialties] = useState("");
   const [page, setPage] = useState(1);
   const limit = 12;
-  const totalPage = Math.ceil((meta?.total || 0) / limit);
+  const totalPage = meta?.total ? Math.ceil(meta.total / limit) : 1;
 
   const fetchDoctors = useCallback(async () => {
     setLoading(true);
@@ -39,7 +39,7 @@ const Doctors = () => {
         limit,
       );
       setDoctors(result?.data?.data || []);
-      setMeta(result?.data?.meta || null);
+      setMeta(result?.data?.meta || { total: 0, page: 1, limit });
     } catch (err) {
       console.error(err);
     } finally {
@@ -105,8 +105,8 @@ const Doctors = () => {
 
       {/* show data */}
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4 my-6">
-        {doctors.map((doctor: IDoctor) => (
-          <PublicDoctorCard doctor={doctor} key={doctor.id} />
+        {doctors?.map((doctor: IDoctor) => (
+          <PublicDoctorCard doctor={doctor} key={doctor?.id} />
         ))}
       </div>
 

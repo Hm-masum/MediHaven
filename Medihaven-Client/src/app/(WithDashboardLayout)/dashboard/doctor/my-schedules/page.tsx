@@ -16,7 +16,7 @@ const MyDoctorSchedulePage = async () => {
         </Link>
       </div>
 
-      <MyDoctorSchedulesInfo doctorScheduleInfo={doctorScheduleInfo.data} />
+      <MyDoctorSchedulesInfo doctorScheduleInfo={doctorScheduleInfo?.data} />
     </div>
   );
 };

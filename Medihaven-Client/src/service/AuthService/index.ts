@@ -37,7 +37,21 @@ export const getCurrentUser = async () => {
   let decodedData = null;
   if (accessToken) {
     decodedData = await jwtDecode(accessToken);
-    return decodedData;
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/user/me`, {
+        headers: {
+          Authorization: accessToken,
+        },
+        cache: "no-store",
+      });
+      const result = await res.json();
+      return {
+        ...decodedData,
+        ...result?.data,
+      };
+    } catch (error) {
+      return decodedData;
+    }
   } else {
     return null;
   }

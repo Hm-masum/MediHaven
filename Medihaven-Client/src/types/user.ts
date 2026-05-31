@@ -7,7 +7,7 @@ export type IUser = {
   name:string
   email: string;
   role: "ADMIN" | "SUPER_ADMIN" | "DOCTOR" | "PATIENT";
-  image?:string;
+  profilePhoto?:string;
   needPasswordChange?: boolean;
   status?: IUserStatus;
   admin?: IAdmin | null;

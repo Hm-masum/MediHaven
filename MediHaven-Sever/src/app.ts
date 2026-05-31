@@ -10,7 +10,7 @@ import cron from "node-cron";
 const app: Application = express();
 app.use(
   cors({
-    origin: ['http://localhost:3000'],
+    origin: ['http://localhost:3000','https://medihaven123.vercel.app'],
     credentials: true,
   }),
 );

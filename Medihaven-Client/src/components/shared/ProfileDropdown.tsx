@@ -32,38 +32,29 @@ const ProfileDropdown = () => {
         <Avatar className="h-10 w-10">
           <AvatarImage
             className="rounded-full"
-            src={user?.image || "https://github.com/shadcn.png"}
+            src={user?.profilePhoto || "https://github.com/shadcn.png"}
           />
           <AvatarFallback>User</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel className="text-xl p-1 text-center">
-          {user?.email}
+          {user?.name}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <Link className="w-full" href={`/dashboard`}>
-              <Button variant="outline" className="w-full text-purple-700">
+              <Button variant="outline" className="w-full text-purple-700 dark:text-pink-500">
                 Dashboard
               </Button>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            {user?.role && (
-              <Link className="w-full" href={`/dashboard/my-profile`}>
-                <Button variant="outline" className="w-full text-purple-700">
-                  My Profile
-                </Button>
-              </Link>
-            )}
-          </DropdownMenuItem>
-          <DropdownMenuItem>
             <Button
               variant="outline"
               onClick={handleLogout}
-              className="w-full text-purple-700"
+              className="w-full text-purple-700 dark:text-pink-500"
             >
               Logout
             </Button>

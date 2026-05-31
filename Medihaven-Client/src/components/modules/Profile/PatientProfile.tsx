@@ -23,7 +23,10 @@ export default function PatientProfile({
 }: {
   patient: IPatientProfile;
 }) {
-  const health = patient.patientHealthData;
+  if (!patient) {
+    return <div>No patient data found</div>;
+  }
+  const health = patient?.patientHealthData;
 
   return (
     <div className="cmx-auto py-2">
@@ -35,8 +38,8 @@ export default function PatientProfile({
             {/* Image */}
             <div className="relative h-32 w-32 overflow-hidden rounded-2xl border-4 border-white bg-white shadow">
               <Image
-                src={patient.profilePhoto || "/default-profile.png"}
-                alt={patient.name}
+                src={patient?.profilePhoto || "/default-profile.png"}
+                alt={patient?.name}
                 fill
                 className="object-cover"
               />
@@ -45,16 +48,16 @@ export default function PatientProfile({
             <div className="space-y-2">
               <div className="flex flex-wrap items-center gap-3">
                 <h1 className="text-xl md:text-3xl font-bold">
-                  {patient.name}
+                  {patient?.name}
                 </h1>
                 <Badge className="bg-green-100 text-green-700 hover:bg-green-100">
-                  {patient.status}
+                  {patient?.status}
                 </Badge>
               </div>
 
               <div className="flex items-center gap-2 text-muted-foreground">
                 <ShieldCheck className="h-4 w-4" />
-                <span>{patient.role}</span>
+                <span>{patient?.role}</span>
               </div>
 
               <div className="flex flex-wrap gap-2">
@@ -85,7 +88,7 @@ export default function PatientProfile({
                     <Mail className="mt-1 h-5 w-5 text-muted-foreground" />
                     <div>
                       <p className="text-sm text-muted-foreground">Email</p>
-                      <p className="font-medium">{patient.email}</p>
+                      <p className="font-medium">{patient?.email}</p>
                     </div>
                   </div>
 
@@ -95,7 +98,7 @@ export default function PatientProfile({
                       <p className="text-sm text-muted-foreground">
                         Contact Number
                       </p>
-                      <p className="font-medium">{patient.contactNumber}</p>
+                      <p className="font-medium">{patient?.contactNumber}</p>
                     </div>
                   </div>
 
@@ -103,7 +106,7 @@ export default function PatientProfile({
                     <MapPin className="mt-1 h-5 w-5 text-muted-foreground" />
                     <div>
                       <p className="text-sm text-muted-foreground">Address</p>
-                      <p className="font-medium">{patient.address}</p>
+                      <p className="font-medium">{patient?.address}</p>
                     </div>
                   </div>
 
@@ -319,7 +322,7 @@ export default function PatientProfile({
                       Account Status
                     </span>
                     <Badge className="bg-green-100 text-green-700 hover:bg-green-100">
-                      {patient.status}
+                      {patient?.status}
                     </Badge>
                   </div>
 
