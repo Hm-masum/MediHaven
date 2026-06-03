@@ -98,16 +98,7 @@ const createPatient = async (req: any): Promise<Patient> => {
       data: req.body.patient,
     });
 
-    const getpatientData = await transactionClient.patient.findUniqueOrThrow({
-      where: {
-        email: req.body.patient.email,
-      },
-      include: {
-        user: true,
-      },
-    });
-
-    return getpatientData;
+    return createdPatientData;
   });
 
   return result;

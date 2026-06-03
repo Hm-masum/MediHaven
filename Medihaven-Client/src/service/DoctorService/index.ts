@@ -7,8 +7,8 @@ export const getAllDoctor = async (
   searchTerm?: string,
   gender?: string,
   specialties?: string,
-  page?: number,
-  limit?: number,
+  page?: string | number,
+  limit?: string | number,
 ) => {
   try {
     const url = new URL(`${process.env.NEXT_PUBLIC_BASE_API}/doctor`);

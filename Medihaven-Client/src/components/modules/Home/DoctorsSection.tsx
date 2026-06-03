@@ -9,6 +9,7 @@ import { getAllDoctor } from "@/service/DoctorService";
 
 const DoctorsSection = async() => {
    const {data:doctors} = await getAllDoctor()
+   
   return (
     <section className="px-6 py-10">
       <div className="mx-auto max-w-6xl">
@@ -40,8 +41,8 @@ const DoctorsSection = async() => {
 
         {/* Doctors Grid */}
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {doctors?.data.slice(0, 8).map((doctor:IDoctor) => (
-            <PublicDoctorCard key={doctor.id} doctor={doctor}/>
+          {doctors?.data?.slice(0, 4).map((doctor:IDoctor) => (
+            <PublicDoctorCard key={doctor?.id} doctor={doctor}/>
           ))}
         </div>
       </div>

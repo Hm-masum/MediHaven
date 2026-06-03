@@ -46,7 +46,7 @@ const LoginForm = () => {
         router.push("/");
         toast.success(result?.message);
       } else {
-        toast.error("Invalid credentials");
+        toast.error(result?.message);
       }
     } catch (err: any) {
       toast.error(err?.message);
@@ -59,7 +59,7 @@ const LoginForm = () => {
       if (result?.success) {
         toast.success(result?.message);
       } else {
-        toast.error("Invalid credentials!");
+        toast.error(result?.message);
       }
     } catch (err: any) {
       toast.error(err?.message);

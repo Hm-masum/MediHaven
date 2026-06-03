@@ -17,7 +17,7 @@ export const createDoctorSchedule = async (scheduleData: any) => {
         body: JSON.stringify(scheduleData),
       },
     );
-    revalidateTag("doctor-schedules","max");
+    revalidateTag("doctor-schedules", "max");
     const result = await res.json();
     return result;
   } catch (error: any) {
@@ -25,21 +25,23 @@ export const createDoctorSchedule = async (scheduleData: any) => {
   }
 };
 
-export const getAllDoctorSchedule = async () => {
+export const getAllDoctorSchedule = async (page?: string, limit?: string) => {
   try {
     const token = await getValidToken();
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/doctor-schedule`,
-      {
-        headers: {
-          Authorization: token,
-          "Content-Type": "application/json",
-        },
-        next: {
-          tags: ["doctor-schedules"],
-        },
+
+    const url = new URL(`${process.env.NEXT_PUBLIC_BASE_API}/doctor-schedule`);
+    if (page) url.searchParams.append("page", page);
+    if (limit) url.searchParams.append("limit", limit);
+
+    const res = await fetch(url.toString(), {
+      headers: {
+        Authorization: token,
+        "Content-Type": "application/json",
       },
-    );
+      next: {
+        tags: ["doctor-schedules"],
+      },
+    });
     const result = await res.json();
     return result;
   } catch (error: any) {
@@ -82,7 +84,7 @@ export const deleteMySchedule = async (id: string) => {
         },
       },
     );
-    revalidateTag("doctor-schedules","max");
+    revalidateTag("doctor-schedules", "max");
     const result = await res.json();
     return result;
   } catch (error: any) {

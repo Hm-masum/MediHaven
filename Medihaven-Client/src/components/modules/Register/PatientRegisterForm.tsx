@@ -54,7 +54,7 @@ const PatientRegisterForm = () => {
         router.push("/login");
         toast.success(result?.message);
       } else {
-        toast.error("Something is wrong!");
+        toast.error(result?.message);
       }
     } catch (err: any) {
       toast.error(err?.message);

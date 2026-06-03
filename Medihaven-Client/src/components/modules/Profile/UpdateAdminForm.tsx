@@ -59,7 +59,7 @@ export default function UpdateAdminForm({
         toast.success("Admin Profile Updated Successfully");
         router.refresh();
       } else {
-        toast.error("Failed to update admin profile");
+        toast.error(res?.message);
       }
     } catch (err: any) {
       toast.error(err?.message);

@@ -100,7 +100,7 @@ export default function UpdatePatientByAdminForm({
         toast.success("Patient Profile Updated Successfully");
         router.refresh();
       } else {
-        toast.error("Failed to update patient profile");
+        toast.error(res?.message);
       }
     } catch (err: any) {
       toast.error(err?.message);

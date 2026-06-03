@@ -12,8 +12,10 @@ const nextConfig: NextConfig = {
   experimental: {
     serverActions: {
       bodySizeLimit: "5mb",
+      allowedOrigins: ['medihaven123.vercel.app', 'localhost:3000'],
     },
   },
 };
 
 export default nextConfig;
+

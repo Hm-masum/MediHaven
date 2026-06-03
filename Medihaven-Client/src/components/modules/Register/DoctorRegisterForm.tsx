@@ -17,6 +17,13 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { registerDoctor } from "@/service/UserService";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const DoctorRegisterForm = () => {
   const [preview, setPreview] = useState<string | null>(null);
@@ -41,7 +48,7 @@ const DoctorRegisterForm = () => {
           registrationNumber: data.registrationNumber,
           experience: Number(data.experience),
           gender: data.gender,
-          appointmentFee: data.appointmentFee,
+          appointmentFee: Number(data.appointmentFee),
           qualification: data.qualification,
           currentWorkingPlace: data.currentWorkingPlace,
           designation: data.designation,
@@ -61,7 +68,7 @@ const DoctorRegisterForm = () => {
         router.push("/login");
         toast.success(result?.message);
       } else {
-        toast.error("Something is wrong!");
+        toast.error(result?.message);
       }
     } catch (err: any) {
       toast.error(err?.message);
@@ -83,7 +90,12 @@ const DoctorRegisterForm = () => {
                 <FormItem className="w-full">
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input type="text" {...field} value={field.value || ""} />
+                    <Input
+                      placeholder="name"
+                      type="text"
+                      {...field}
+                      value={field.value || ""}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -97,7 +109,12 @@ const DoctorRegisterForm = () => {
                 <FormItem className="w-full">
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input type="email" {...field} value={field.value || ""} />
+                    <Input
+                      placeholder="email"
+                      type="email"
+                      {...field}
+                      value={field.value || ""}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -113,7 +130,12 @@ const DoctorRegisterForm = () => {
                 <FormItem className="w-full">
                   <FormLabel>Contact Number</FormLabel>
                   <FormControl>
-                    <Input type="text" {...field} value={field.value || ""} />
+                    <Input
+                      placeholder="contact number"
+                      type="text"
+                      {...field}
+                      value={field.value || ""}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -127,7 +149,12 @@ const DoctorRegisterForm = () => {
                 <FormItem className="w-full">
                   <FormLabel>Address</FormLabel>
                   <FormControl>
-                    <Input type="text" {...field} value={field.value || ""} />
+                    <Input
+                      placeholder="address"
+                      type="text"
+                      {...field}
+                      value={field.value || ""}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -143,7 +170,12 @@ const DoctorRegisterForm = () => {
                 <FormItem className="w-full">
                   <FormLabel>Registration Number</FormLabel>
                   <FormControl>
-                    <Input type="text" {...field} value={field.value || ""} />
+                    <Input
+                      placeholder="registration number"
+                      type="text"
+                      {...field}
+                      value={field.value || ""}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -157,7 +189,12 @@ const DoctorRegisterForm = () => {
                 <FormItem className="w-full">
                   <FormLabel>Experience</FormLabel>
                   <FormControl>
-                    <Input type="text" {...field} value={field.value || ""} />
+                    <Input
+                      placeholder="example: 5"
+                      type="text"
+                      {...field}
+                      value={field.value || ""}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -172,9 +209,20 @@ const DoctorRegisterForm = () => {
               render={({ field }) => (
                 <FormItem className="w-full">
                   <FormLabel>Gender</FormLabel>
-                  <FormControl>
-                    <Input type="text" {...field} value={field.value || ""} />
-                  </FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select gender" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="MALE">MALE</SelectItem>
+                      <SelectItem value="FEMALE">FEMALE</SelectItem>
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
@@ -187,7 +235,7 @@ const DoctorRegisterForm = () => {
                 <FormItem className="w-full">
                   <FormLabel>Appointment Fee</FormLabel>
                   <FormControl>
-                    <Input type="text" {...field} value={field.value || ""} />
+                    <Input placeholder="example: 100" type="number" {...field} value={field.value || ""} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -203,7 +251,7 @@ const DoctorRegisterForm = () => {
                 <FormItem className="w-full">
                   <FormLabel>Qualification</FormLabel>
                   <FormControl>
-                    <Input type="text" {...field} value={field.value || ""} />
+                    <Input placeholder="example: MBBS, MD" type="text" {...field} value={field.value || ""} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -217,7 +265,7 @@ const DoctorRegisterForm = () => {
                 <FormItem className="w-full">
                   <FormLabel>Current Working Place</FormLabel>
                   <FormControl>
-                    <Input type="text" {...field} value={field.value || ""} />
+                    <Input placeholder="example: City Hospital" type="text" {...field} value={field.value || ""} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -233,7 +281,7 @@ const DoctorRegisterForm = () => {
                 <FormItem className="w-full">
                   <FormLabel>Designation</FormLabel>
                   <FormControl>
-                    <Input type="text" {...field} value={field.value || ""} />
+                    <Input placeholder="example: Professor" type="text" {...field} value={field.value || ""} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

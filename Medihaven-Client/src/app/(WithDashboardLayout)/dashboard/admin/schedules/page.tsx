@@ -3,7 +3,11 @@ import { getAllSchedule } from "@/service/ScheduleService";
 import { ISchedule } from "@/types";
 import Link from "next/link";
 
-const SchedulePage = async ({searchParams}: {searchParams: Promise<{ page?: string }>}) => {
+const SchedulePage = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>;
+}) => {
   const params = await searchParams;
   const page = Number(params.page) || 1;
   const limit = 9;
@@ -23,14 +27,20 @@ const SchedulePage = async ({searchParams}: {searchParams: Promise<{ page?: stri
         </Link>
       </div>
 
-       {/* Schedule Cards */}
+      {/* Schedule Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        {ScheduleInfo.data.map((schedule: ISchedule) => (
-          <ScheduleCard key={schedule.id} schedule={schedule} />
-        ))}
+        {ScheduleInfo?.data?.length ? (
+          ScheduleInfo.data.map((schedule: ISchedule) => (
+            <ScheduleCard key={schedule.id} schedule={schedule} />
+          ))
+        ) : (
+          <div className="col-span-full text-center py-10">
+            <p className="text-purple-500">No schedules available.</p>
+          </div>
+        )}
       </div>
 
-        {/* pagination */}
+      {/* pagination */}
       <div className="flex justify-center items-center gap-2 mt-6 flex-wrap">
         <Link
           href={`?page=${page - 1}`}

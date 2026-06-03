@@ -16,13 +16,17 @@ import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 
 import { logout } from "@/service/AuthService";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const ProfileDropdown = () => {
-  const { user, setIsLoading } = useUser();
+  const { user, setIsLoading, setUser } = useUser();
+  const router = useRouter();
 
   const handleLogout = async () => {
     await logout();
-    setIsLoading(true);
+    setUser(null);
+    router.refresh();
+    router.push("/")
     toast.success("Logout successfully");
   };
 

@@ -96,7 +96,7 @@ export default function UpdateDoctorForm({
         toast.success("Doctor Profile Updated Successfully");
         router.refresh();
       } else {
-        toast.error("Failed to update doctor profile");
+        toast.error(res?.message);
       }
     } catch (err: any) {
       toast.error(err?.message);

@@ -4,16 +4,18 @@ import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Star, MapPin, Phone, Mail, Cross, X } from "lucide-react";
+import { Star, MapPin, Phone, Mail, X } from "lucide-react";
 import { IDoctor } from "@/types/doctor";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { IDoctorSchedule } from "@/types";
 import { toast } from "sonner";
 import { createAppointment } from "@/service/AppointmentService";
+import { useRouter } from "next/navigation";
 
 export default function PublicDoctorDetails({ doctor }: { doctor: IDoctor }) {
   const [selectedDoctor, setSelectedDoctor] = useState<IDoctor | null>(null);
+  const router = useRouter();
 
   const appointmentBook = async (schedule: IDoctorSchedule) => {
     try {
@@ -25,6 +27,7 @@ export default function PublicDoctorDetails({ doctor }: { doctor: IDoctor }) {
       const result = await createAppointment(data);
       if (result?.success) {
         toast.success(result?.message);
+        router.refresh();
       } else {
         toast.error(result?.message);
       }
@@ -192,8 +195,8 @@ export default function PublicDoctorDetails({ doctor }: { doctor: IDoctor }) {
                   </div>
 
                   {selectedDoctor && (
-                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-                      <div className="w-full max-w-2xl rounded-2xl bg-white p-6 shadow-xl dark:bg-zinc-900">
+                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 overflow-y-auto">
+                      <div className="w-full max-w-2xl rounded-2xl bg-white p-6 shadow-xl dark:bg-zinc-900  max-h-[90vh] overflow-y-auto my-auto">
                         {/* Header */}
                         <div className="mb-5 flex items-center justify-between">
                           <div>

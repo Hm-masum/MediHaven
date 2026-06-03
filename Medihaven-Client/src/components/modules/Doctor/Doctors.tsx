@@ -25,7 +25,7 @@ const Doctors = () => {
   const [gender, setGender] = useState("");
   const [specialties, setSpecialties] = useState("");
   const [page, setPage] = useState(1);
-  const limit = 12;
+  const limit = 8;
   const totalPage = meta?.total ? Math.ceil(meta.total / limit) : 1;
 
   const fetchDoctors = useCallback(async () => {
@@ -51,7 +51,7 @@ const Doctors = () => {
     setLoading(true);
     try {
       const result = await getAllSpecialties();
-      setAllSpecialties(result?.data);
+      setAllSpecialties(result?.data ?? []);
     } catch (err) {
       console.error(err);
     } finally {
@@ -69,18 +69,18 @@ const Doctors = () => {
       {/* filtering */}
       <div className="flex flex-col gap-4 rounded-3xl border border-purple-100 p-4 shadow-sm md:flex-row md:items-center">
         <div className="relative flex-1">
-          <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-pink-500" />
+          <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-purple-500" />
           <input
             type="text"
             placeholder="Search doctors by name or email..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="h-12 w-full rounded-2xl border border-purple-100 bg-purple-50/40 pl-11 pr-4 text-sm outline-none transition-all placeholder:text-pink-500 focus:border-purple-300 focus:ring-4 focus:ring-purple-100"
+            className="h-12 w-full rounded-2xl border border-purple-100 bg-purple-50/40 pl-11 pr-4 text-sm outline-none transition-all placeholder:text-purple-500 focus:border-purple-300 focus:ring-4 focus:ring-purple-100"
           />
         </div>
 
         <select
-          className="h-12 rounded-2xl border border-purple-100 bg-purple-50/40 px-4 text-sm text-pink-500 outline-none transition-all focus:border-purple-300 focus:ring-4 focus:ring-purple-100"
+          className="h-12 rounded-2xl border border-purple-100 bg-purple-50/40 px-4 text-sm text-purple-500 outline-none transition-all focus:border-purple-300 focus:ring-4 focus:ring-purple-100"
           value={gender}
           onChange={(e) => setGender(e.target.value)}
         >
@@ -90,14 +90,14 @@ const Doctors = () => {
         </select>
 
         <select
-          className="h-12 rounded-2xl border border-purple-100 bg-purple-50/40 px-4 text-sm text-pink-500 outline-none transition-all focus:border-purple-300 focus:ring-4 focus:ring-purple-100"
+          className="h-12 rounded-2xl border border-purple-100 bg-purple-50/40 px-4 text-sm text-purple-500 outline-none transition-all focus:border-purple-300 focus:ring-4 focus:ring-purple-100"
           value={specialties}
           onChange={(e) => setSpecialties(e.target.value)}
         >
           <option value="">All Specialties</option>
-          {allSpecialties.map((sp) => (
-            <option key={sp.id} value={sp.title}>
-              {sp.title}
+          {allSpecialties?.map((sp) => (
+            <option key={sp?.id} value={sp?.title}>
+              {sp?.title}
             </option>
           ))}
         </select>

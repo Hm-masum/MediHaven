@@ -8,6 +8,8 @@ const authRoutes = ["/login","/register"];
 
 const roleBasedPrivateRoutes = {
     admin:[/^\/admin/],
+    doctor:[/^\/doctor/],
+    patient:[/^\/patient/],
 }
 
 export const middleware = async(request: NextRequest)=>{
@@ -37,5 +39,5 @@ export const middleware = async(request: NextRequest)=>{
 
 
 export const config ={
-    matcher:["/admin","/admin/:page"]
+    matcher:["/admin","/admin/:page*", "/doctor", "/doctor/:page*", "/patient", "/patient/:page*"]
 }
