@@ -186,7 +186,7 @@ medihaven/
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### 1. Clone the Repository
 
@@ -214,7 +214,20 @@ npm run dev
 ```
 Frontend runs at: `http://localhost:3000`
 
+### 4.User Credentials
+```
+Admin gmail: hhmasum88@gmail.com
+Admin password: 123456
+
+Doctor gmail: sadik@gmail.com
+Doctor password: 123456
+
+Patient gmail: twki@gmail.com
+Patient password: 123456
+```
 ---
+
+
 
 ##  Environment Variables
 
