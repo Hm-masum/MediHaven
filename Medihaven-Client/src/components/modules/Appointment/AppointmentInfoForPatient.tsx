@@ -6,6 +6,7 @@ import { TLTable } from "@/components/ui/core/TLTable";
 import { initPayment } from "@/service/PaymentService";
 import { IAppointment } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
+import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -130,6 +131,36 @@ const AppointmentInfoForPatient = ({
       cell: ({ row }) => (
         <span>{row.original?.doctor?.appointmentFee || "N/A"}</span>
       ),
+    },
+    {
+      accessorKey: "review",
+      header: "Review",
+      cell: ({ row }) => {
+        const { status, review } = row.original;
+        if (status !== "COMPLETED") {
+          return (
+            <span className="text-muted-foreground">
+              Appointment Not Completed
+            </span>
+          );
+        }
+        if (status === "COMPLETED" && !review) {
+          return (
+            <Button className="bg-linear-to-r from-purple-500 to-pink-500">
+              <Link
+                href={`/dashboard/patient/review/create/${row.original.id}`}
+              >
+                Create Review
+              </Link>
+            </Button>
+          );
+        }
+        return (
+          <span className="text-green-600 font-medium">
+            Review Created
+          </span>
+        );
+      },
     },
   ];
 

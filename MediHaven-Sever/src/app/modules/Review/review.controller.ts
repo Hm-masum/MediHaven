@@ -18,7 +18,7 @@ const createReview = catchAsync(
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: "Prescription create successfully",
+      message: "Review created successfully",
       data: result,
     });
   }

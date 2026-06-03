@@ -10,6 +10,7 @@ export const createReview = async (prescriptionData: any) => {
       method: "POST",
       headers: {
         Authorization: token,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(prescriptionData),
     });

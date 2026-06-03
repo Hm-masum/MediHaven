@@ -9,9 +9,13 @@ import emailSender from "./emailSender";
 import ApiError from "../../errors/ApiError";
 
 const loginUser = async (payload: { email: string; password: string }) => {
-  const userData = await prisma.user.findUniqueOrThrow({
+  const userData = await prisma.user.findUnique({
     where: { email: payload.email, status: UserStatus.ACTIVE },
   });
+
+  if (!userData) {
+    throw new Error("No user found with this email");
+  }
 
   const isCorrectPassword: boolean = await bcrypt.compare(
     payload.password,
